@@ -30,7 +30,7 @@ a:hover {
 
                             /* resortNavigationBarSection  */
 #parks {
-  box-shadow: 0 4px 2px -1px gray;
+  /* box-shadow: 0 4px 2px -1px gray; */
   position: fixed;
   z-index: 100;
   width: 100%;
@@ -354,15 +354,30 @@ padding-left: 0;
 }
 
                           /* landTimesSection */
-  #landTimesSection {
-    margin-top: 5em;
-   }
+#landTimesSection {
+  margin-top: 5em;
+}
 
-   #dateSelection {
-     width: 20px;
-     height: 20px;
-   }
+#selectDate select {
+  background-color: #0563af;
+  color: white;
+  padding: 12px;
+  width: 250px;
+  border: none;
+  font-size: 17px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+}
 
+select {
+  text-align-last: center;
+}
+
+select:hover, option:hover {
+  cursor: pointer !important;
+}
 
                             /* weatherSection */
 
