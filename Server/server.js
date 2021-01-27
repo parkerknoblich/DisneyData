@@ -21,6 +21,7 @@ const port = 8000;
 app.use(cors());
 
 app.get("/disneylandparkanaheimwaittimes", (req, res) => {
+    // foo();
     DisneylandResortMagicKingdom.GetWaitTimes().then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
@@ -115,5 +116,9 @@ app.get("/tokyodisneyseawaittimes", (req, res) => {
         console.error(error);
     });
 });
+
+// function foo() {
+//     console.log("PENIS");
+// }
 
 app.listen(port);

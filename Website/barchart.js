@@ -1,26 +1,33 @@
 (function() {
 
   let activeParkID = 1;
+  let ridesToRemove;
   let currentLands;
-  let disneylandParkAnaheimLands = ["Adventureland", "Critter Country", "Fantasyland", "Frontierland", "Main Street U.S.A.", 
+  const disneylandParkAnaheimLands = ["Adventureland", "Critter Country", "Fantasyland", "Frontierland", "Main Street U.S.A.", 
   "Mickey's Toontown", "New Orleans Square", "Star Wars: Galaxy's Edge", "Tomorrowland"];
-  let disneyCaliforniaAdventureParkLands = ["Cars Land", "Grizzly Peak", "Hollywood Land", "Pacific Wharf", "Paradise Gardens Park",
+  const disneyCaliforniaAdventureParkLands = ["Cars Land", "Grizzly Peak", "Hollywood Land", "Pacific Wharf", "Paradise Gardens Park",
   "Pixar Pier"];
-  let animalKingdomLands = ["Africa", "Asia", "DinoLand U.S.A.", "Discovery Island", "Oasis", "Pandora - The World of Avatar",
+  const animalKingdomLands = ["Africa", "Asia", "DinoLand U.S.A.", "Discovery Island", "Oasis", "Pandora - The World of Avatar",
   "Rafiki's Plant Watch"];
-  let epcotLands = ["Future World", "World Showcase"];
-  let hollywoodStudiosLands = ["Animation Courtyard", "Echo Lake", "Grand Avenue", "Hollywood Boulevard", "Star Wars: Galaxy's Edge",
+  const epcotLands = ["Future World", "World Showcase"];
+  const hollywoodStudiosLands = ["Animation Courtyard", "Echo Lake", "Grand Avenue", "Hollywood Boulevard", "Star Wars: Galaxy's Edge",
   "Sunset Boulevard", "Toy Story Land"];
-  let magicKingdomLands = ["Adventureland", "Fantasyland", "Frontierland", "Liberty Square", "Main Street U.S.A", "Tomorrowland"];
-  let disneylandParkParisLands = ["Adventureland", "Discoveryland", "Fantasyland", "Frontierland", "Main Street U.S.A."];
-  let waltDisneyStudiosParkLands = ["Front Lot", "Production Courtyard", "Toon Studio"];
-  let disneylandParkHongKongLands = ["Adventureland", "Fantasyland", "Grizzly Gulch", "Main Street U.S.A.", "Mystic Point",
+  const magicKingdomLands = ["Adventureland", "Fantasyland", "Frontierland", "Liberty Square", "Main Street U.S.A", "Tomorrowland"];
+  const disneylandParkParisLands = ["Adventureland", "Discoveryland", "Fantasyland", "Frontierland", "Main Street U.S.A."];
+  const waltDisneyStudiosParkLands = ["Front Lot", "Production Courtyard", "Toon Studio"];
+  const disneylandParkHongKongLands = ["Adventureland", "Fantasyland", "Grizzly Gulch", "Main Street U.S.A.", "Mystic Point",
   "Tomorrowland", "Toy Story Land"];
-  let shanghaiDisneylandLands = ["Adventure Isle", "Fantasyland", "Gardens of Imagination", "Tomorrowland", "Toy Story Land", 
+  const shanghaiDisneylandLands = ["Adventure Isle", "Fantasyland", "Gardens of Imagination", "Tomorrowland", "Toy Story Land", 
   "Treasure Cove"];
-  let tokyoDisneylandLands = ["Adventureland", "Critter Country", "Fantasyland", "Tomorrowland", "Toontown", "World Bazaar"];
-  let tokyoDisneySeaLands = ["American Waterfront", "Arabian Coast", "Lost River Delta", "Mediterranean Harbor", 
+  const tokyoDisneylandLands = ["Adventureland", "Critter Country", "Fantasyland", "Tomorrowland", "Toontown", "World Bazaar"];
+  const tokyoDisneySeaLands = ["American Waterfront", "Arabian Coast", "Lost River Delta", "Mediterranean Harbor", 
   "Mermaid Lagoon", "Mysterious Island", "Port Discovery"];
+  const disneylandParkAnaheimRidesToRemove = ["Encounter the Dark Side at Star Wars Launch Bay", "Fantasmic!", "Meet Disney Princesses at Royal Hall",
+  "Meet the Resistance at Star Wars Launch Bay", "Meet Tinker Bell at Pixie Hollow", "Mickey and the Magical Map"];
+  const disneyCaliforniaAdventureParkRidesToRemove = ["Disney Junior Dance Party!", "Frozen – Live at the Hyperion", "Heroic Encounter: Captain Marvel", 
+  "Walt Disney Imagineering Blue Sky Cellar", "World of Color"];
+  const animalKingdomRidesToRemove = ["Meet Favorite Disney Pals at Adventurers Outpost", "Nomad Lounge",
+  "The Animation Experience at Conservation Station", "The Boneyard", "Tiffins Restaurant"];
 
   window.addEventListener("load", setUp);
   window.addEventListener("load", getWaitTimes);
@@ -29,12 +36,15 @@
     if (document.URL.includes("disneylandparkanaheim")) {
       activeParkID = 1;
       currentLands = disneylandParkAnaheimLands;
+      ridesToRemove = disneylandParkAnaheimRidesToRemove;
     } else if (document.URL.includes("disneycaliforniaadventurepark")) {
       activeParkID = 2;
       currentLands = disneyCaliforniaAdventureParkLands;
+      ridesToRemove = disneyCaliforniaAdventureParkRidesToRemove;
     } else if (document.URL.includes("animalkingdom")) {
       activeParkID = 3;
       currentLands = animalKingdomLands;
+      ridesToRemove = animalKingdomRidesToRemove;
     } else if (document.URL.includes("epcot")) {
       activeParkID = 4;
       currentLands = epcotLands;
@@ -111,14 +121,28 @@
         .then(function(response) {
             return response.sort(sortRides("name"))
         })
+        .then(function(response) {
+          return filterRides(response);
+        })
         .then(displayWaitTimes);
   }
 
   function sortRides(key) {
-    return function(a, b) {
-        return a[key].replace(/\W/g, '').localeCompare(b[key].replace(/\W/g, ''));
-    }
-}
+      return function(a, b) {
+          return a[key].replace(/\W/g, '').localeCompare(b[key].replace(/\W/g, ''));
+      }
+  }
+
+  function filterRides(responseData) {
+      let filteredArray = [];
+      for (let i = 0; i < responseData.length; i++) {
+        if (!ridesToRemove.includes(responseData[i].name.replace(" - Temporarily Unavailable", ""))) {
+            filteredArray.push(responseData[i]);
+        }
+      }
+      console.log(filteredArray);
+      return filteredArray;
+  }
 
   function displayWaitTimes(responseData) {
     for (let i = 0; i < responseData.length; i++) {
@@ -127,14 +151,12 @@
     let allRidesImages = document.getElementsByClassName("rideImage");
     for (let i = 0; i < allRidesImages.length; i++) {
         allRidesImages[i].addEventListener("click", function() {
-            setTimeout(displayIndividualWaitTime, 350, 30, i);
+            setTimeout(displayIndividualWaitTime, 350, responseData[i].waitTime, i);
         }, {once : true});
     }
   }
 
   function displayIndividualWaitTime(num, rideNumber) {
-    // alert(num);
-    // let num = 30;
     let color;
     if (num <= 30) {
         color = "#39ff14"
