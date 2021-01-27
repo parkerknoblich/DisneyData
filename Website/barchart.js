@@ -28,6 +28,26 @@
   "Walt Disney Imagineering Blue Sky Cellar", "World of Color"];
   const animalKingdomRidesToRemove = ["Meet Favorite Disney Pals at Adventurers Outpost", "Nomad Lounge",
   "The Animation Experience at Conservation Station", "The Boneyard", "Tiffins Restaurant"];
+  const epcotRidesToRemove = ["Awesome Planet", "Beauty and the Beast Sing-Along", "Biergarten Restaurant",
+  "Canada Far and Wide in Circle-Vision 360", "Coral Reef Restaurant", "Disney and Pixar Short Film Festival",
+  "Garden Grill Restaurant", "Impressions de France", "La Hacienda de San Angel", "Le Cellier Steakhouse",
+  "Meet Anna and Elsa at Royal Sommerhus", "Reflections of China", "Rose & Crown Dining Room", "San Angel Inn Restaurante",
+  "Spice Road Table", "The American Adventure"];
+  const hollywoodStudiosRidesToRemove = ["50's Prime Time Café", "BB-8 Astromech on Duty", "Beauty and the Beast-Live on Stage",
+  "Celebrity Spotlight", "Disney Junior Dance Party!", "Disney Junior Play and Dance!", "Disney Society Orchestra and Friends",
+  "For the First Time in Forever: A Frozen Sing-Along Celebration", "Hollywood & Vine", "Indiana Jones™ Epic Stunt Spectacular!",
+  "Lightning McQueen's Racing Academy", "Mama Melrose's Ristorante Italiano", "Meet Sulley at Walt Disney Presents",
+  "Mickey and Minnie Starring in Red Carpet Dreams", "Muppet*Vision 3D", "Oga's Cantina at the Walt Disney World Resort",
+  "Sci-Fi Dine-In Theater Restaurant", "Star Wars: Galaxy's Edge", "Star Wars Launch Bay: Encounter Darth Vader",
+  "Star Wars Launch Bay: Meet Chewbacca", "Star Wars Launch Bay Theater", "The Hollywood Brown Derby", "Vacation Fun - An Original Animated Short with Mickey & Minnie",
+  "Voyage of The Little Mermaid", "Walt Disney Presents"];
+  const magicKingdomRidesToRemove = ["A Pirate's Adventure ~ Treasures of the Seven Seas", "Be Our Guest Restaurant", "Cinderella's Royal Table",
+  "Country Bear Jamboree", "Enchanted Tales with Belle", "Jungle Navigation Co. LTD Skipper Canteen", "Liberty Square Market",
+  "Liberty Tree Tavern", "Main Street Vehicles", "Meet Ariel at Her Grotto", "Meet Cinderella and Elena at Princess Fairytale Hall",
+  "Meet Daring Disney Pals as Circus Stars at Pete's Silly Side Show", "Meet Dashing Disney Pals as Circus Stars at Pete’s Silly Side Show",
+  "Meet Mickey Mouse at Town Square Theater", "Meet Rapunzel and Tiana at Princess Fairytale Hall", "Meet Tinker Bell at Town Square Theater",
+  "Sorcerers of the Magic Kingdom", "The Crystal Palace", "The Hall of Presidents", "The Plaza Restaurant", "Tony's Town Square Restaurant",
+  "Walt Disney World Railroad - Fantasyland", "Walt Disney World Railroad - Frontierland"];
 
   window.addEventListener("load", setUp);
   window.addEventListener("load", getWaitTimes);
@@ -48,12 +68,15 @@
     } else if (document.URL.includes("epcot")) {
       activeParkID = 4;
       currentLands = epcotLands;
+      ridesToRemove = epcotRidesToRemove;
     } else if (document.URL.includes("hollywoodstudios")) {
       activeParkID = 5;
       currentLands = hollywoodStudiosLands;
+      ridesToRemove = hollywoodStudiosRidesToRemove;
     } else if (document.URL.includes("magickingdom")) {
       activeParkID = 6;
       currentLands = magicKingdomLands;
+      ridesToRemove = magicKingdomRidesToRemove;
     } else if (document.URL.includes("disneylandparkparis")) {
       activeParkID = 7;
       currentLands = disneylandParkParisLands;
@@ -136,7 +159,7 @@
   function filterRides(responseData) {
       let filteredArray = [];
       for (let i = 0; i < responseData.length; i++) {
-        if (!ridesToRemove.includes(responseData[i].name.replace(" - Temporarily Unavailable", ""))) {
+        if (!ridesToRemove.includes(responseData[i].name.replace(" - Temporarily Unavailable", "").trim())) {
             filteredArray.push(responseData[i]);
         }
       }
