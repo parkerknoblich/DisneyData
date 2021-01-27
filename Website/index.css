@@ -1,0 +1,371 @@
+* {
+	margin: 0;
+	padding: 0;
+  list-style-type: none;
+}
+
+body {
+  background-image: url("images/ridetimessectionbackground.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+a {
+  text-decoration: none;
+    font-weight: bold;
+    font-size: larger;
+    display: block;
+    text-align: center;
+}
+
+a:hover {
+  color: white;
+}
+
+.flex {
+  display: flex;
+}
+
+
+
+                            /* resortNavigationBarSection  */
+#parks {
+  box-shadow: 0 4px 2px -1px gray;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+}
+
+ #parks, .dropdown{
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  display: flex;
+  height: 3em;  
+}
+
+#parks  li {
+  background: white;
+  display: block;
+  float: left;
+  padding: 0.8rem;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.5s;
+  flex: 1 0 auto;
+}
+
+#parks li:hover {
+  background: #33BBFF;
+  cursor: pointer;
+  color: white;
+}
+
+li a {
+  color: black;
+}
+
+li:hover > a, .activeResort > a {
+  color: white;
+}
+
+ul li ul {
+  /* visibility: hidden; */
+  opacity: 0;
+  position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 5.3em;
+  left: 0;
+  display: none;
+}
+
+ul li:hover > ul,
+ul li ul:hover {
+visibility: visible;
+opacity: 1;
+display: block;
+}
+
+ul li ul li {
+  clear: both;
+width: 100%;
+}
+
+ul > li > ul {
+width: 100%;
+}
+
+#parks > li > ul > li {
+padding-top: 1em;
+padding-bottom: 1em;
+padding-right: 0;
+padding-left: 0;
+}
+
+#parks > li > ul {
+  margin-top: 0.7em;
+}
+
+.activeResort {
+  background-color:  #33BBFF !important;
+}
+
+                                 /* sidebarSection */
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  position: fixed;
+  margin-top: 35vh;
+  right: 1.5em;
+  background-image: url("images/sidebarbackgroundimage.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid transparent;
+  border-radius: 25px;
+}
+ .sidebarElement {
+  width: 6em;
+  height: 6em;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebarElement:hover {
+  cursor: pointer;
+}
+
+.sidebarImage {
+  align-self: center;
+  background-size: contain;
+  width: 80%;
+  height: 80%;
+}
+
+#carouselSidebarElement > a {
+  background-image: url("images/carouselsidebarimage.png");
+}
+
+#carouselSidebarElement > a:hover {
+  background-image: url("images/carouselsidebarimage2.png");
+}
+
+#ridesSidebarElement > a {
+  background-image: url("images/ridessidebarimage.png");
+}
+
+#ridesSidebarElement > a:hover {
+  background-image: url("images/ridessidebarimage2.png");
+}
+
+#landsSidebarElement > a {
+  background-image: url("images/landssidebarimage.png");
+}
+
+#landsSidebarElement > a:hover {
+  background-image: url("images/landssidebarimage2.png");
+}
+
+#weatherSidebarElement > a {
+  background-image: url("images/weathersidebarimage.png");
+}
+
+#weatherSidebarElement > a:hover {
+  background-image: url("images/weathersidebarimage2.png");
+}
+
+
+                                 /* carouselSection */
+@keyframes slidy {
+0% { left: 0%; }
+20% { left: 0%; }
+25% { left: -100%; }
+45% { left: -100%; }
+50% { left: -200%; }
+70% { left: -200%; }
+75% { left: -300%; }
+95% { left: -300%; }
+100% { left: -400%; }
+}
+
+ #slider { 
+  overflow: hidden; 
+  position: relative;
+  width: 100%;
+  height: 100vh;
+ }
+
+#slider figure img { 
+  width: 20%; 
+  float: left; 
+  height: 100vh;
+}
+
+#slider figure { 
+  position: relative;
+  width: 500%;
+  margin: 0;
+  left: 0;
+  text-align: left;
+  font-size: 0;
+  animation: 30s slidy infinite; 
+}
+
+#indicatorContainer {
+  position: absolute;
+  top: 90vh;
+  left: 43%;
+}
+
+.indicator {
+  height: 1.5em;
+  width: 1.5em;
+  margin: 0 1em;
+  border: 3px solid white;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.8s ease;
+}
+
+.activeIndicator {
+  background-color: #33BBFF;
+}
+
+                                  /* rideTimesSection */
+
+#rideSearch {
+  border-radius: 25px;
+  height: 2em;
+  margin-left: 35%;
+  width: 30em;
+  margin-top: 2em;
+  outline: none;
+  text-align: center;
+  font-size: larger;
+  border: none;
+  box-shadow: 0 4px 2px -2px gray;
+}
+
+#ridesContainer {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#rides {
+  width: 90%;
+  border-radius: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+  display: block;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+  -webkit-align-items: left;
+  -webkit-moz-items: left;
+  align-items: left;
+  -webkit-justify-content: left;
+  -moz-justify-content: left;
+  justify-content: left;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-flex-flow: row wrap;
+  -moz-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-align-content: flex-end;
+  -moz-align-content: flex-end;
+  align-content: flex-end;
+}
+
+#rides > li {
+  font-size: 2em;
+  /* height: 10em; */
+  height: 13em;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  display: inline-block;
+  display: box;
+  /* width: 33%; */
+  width: 50%;
+}
+
+.rideImage {
+  width: 100%;
+  height: 100%;
+  transition: all 1.5s;
+}
+
+.rideImage:focus {
+  transform: scale(1.5);
+}
+
+.rideImage:hover, .child:hover {
+  cursor: pointer;
+}
+
+#rides img:hover p:hover, #rides img:focus p:focus{
+  display: block;
+}
+
+.parent
+{
+  overflow: hidden;
+  /* text-align: center; */
+  position: relative;
+  /* height: 10em; */
+  height: 15em;
+}
+
+.parent > img {
+  width: 100%;
+  height: 100%;
+}
+
+ .child
+{
+  background: rgba( 0, 0, 0, 0.7 );
+  /* bottom: -7.7em; */
+  bottom: -10.7em;
+  color: #fff;
+  height: 100%;
+  left: 0%;
+  /* text-align: center; */
+  position: absolute;
+  transition: bottom 1.5s ease;
+  width: 100%;
+}
+
+.rideName {
+  font-weight: bolder;
+}
+
+.land {
+  font-size: 0.8em;
+}
+
+.rideImage:focus + .child {
+  bottom: 0%;
+}
+
+                          /* landTimesSection */
+  #landTimesSection {
+    margin-top: 5em;
+   }
+
+   #dateSelection {
+     width: 20px;
+     height: 20px;
+   }
+
+
+                            /* weatherSection */
+
+ #weatherSection {
+   margin-top: 5em;
+ }

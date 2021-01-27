@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="..\progressbar.css">
+    <link rel="stylesheet" href="..\barchart.css">
+    <link rel="stylesheet" href="..\index.css">
+
+    <script src="..\progressbar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="..\barchart.js"></script>
+    <script src="..\index.js"></script>
+    <title>DisneyData</title>
+</head>
+<body>
+
+    <section id="resortNavigationBarSection">
+        <ul id="parks">
+            <li><a href="#">Disneyland Resort</a>
+              <ul class="dropdown">
+                <li><a href="disneylandparkanaheim.html">Disneyland Park</a></li>
+                <li><a href="disneycaliforniaadventurepark.html">Disney California Adventure Park</a></li>
+              </ul>
+            </li>
+            <li class="activeResort"><a href="#">Walt Disney World Resort</a>
+              <ul class="dropdown">
+                <li><a href="animalkingdom.html">Animal Kingdom</a></li>
+                <!-- <li><a href="blizzardbeach.html">Blizzard Beach</a></li> -->
+                <li><a href="epcot.html">Epcot</a></li>
+                <li><a href="hollywoodstudios.html">Hollywood Studios</a></li>
+                <li><a href="magickingdom.html">Magic Kingdom</a></li>
+                <!-- <li><a href="typhoonlagoon.html">Typhoon Lagoon</a></li> -->
+              </ul>
+            </li>
+            <li><a href="#">Disneyland Paris</a>
+              <ul class="dropdown">
+                <li><a href="disneylandparkparis.html">Disneyland Park</a></li>
+                <li><a href="waltdisneystudiospark.html">Walt Disney Studios Park</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Hong Kong Disneyland Resort</a>
+              <ul class="dropdown">
+                <li><a href="disneylandparkhongkong.html">Disneyland Park</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Shanghai Disney Resort</a>
+              <ul class="dropdown">
+                <li><a href="shanghaidisneyland.html">Shanghai Disneyland</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Tokyo Disney Resort</a>
+              <ul class="dropdown">
+                <li><a href="tokyodisneyland.html">Tokyo Disneyland</a></li>
+                <li><a href="tokyodisneysea.html">Tokyo DisneySea</a></li>
+              </ul>
+            </li>
+          </ul>
+    </section>
+
+    <section id="sidebarSection">
+        <div id="sidebar">
+            <div id="carouselSidebarElement" class="sidebarElement">
+                <a href="#carouselSection" class="sidebarImage"></a>
+            </div>
+            <div id="ridesSidebarElement" class="sidebarElement">
+                <a href="#rideTimesSection" class="sidebarImage"></a>
+            </div>
+            <div id="landsSidebarElement" class="sidebarElement">
+                <a href="#landTimesSection" class="sidebarImage"></a>
+            </div>
+            <div id="weatherSidebarElement" class="sidebarElement">
+                <a href="#weatherSection" class="sidebarImage"></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="carouselSection">
+        <div id="slider">
+            <figure>
+              <img src="..\images/spaceshipearthcarouselimage.jpg">
+              <img src="..\images/japanpavillioncarouselimage.jpg">
+              <img src="..\images/francepavillioncarouselimage.jpg">
+              <img src="..\images/moroccocarouselimage.jpg">
+              <img src="..\images/spaceshipearthcarouselimage.jpg">
+            </figure>
+            <div id="indicatorContainer">
+                <span class="indicator activeIndicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+            </div>
+          </div>
+    </section>
+
+    <section id="rideTimesSection">
+        <input id="rideSearch" type="search" placeholder="Search for an attraction...">
+        <div id="ridesContainer">
+            <ul id="rides">
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/frozeneverafter.jpg">
+                        <div class="child">
+                            <p class="rideName">Frozen Ever After</p>
+                            <p class="land">World Showcase, Norway</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/granfiestatour.jpg">
+                        <div class="child">
+                            <p class="rideName">Gran Fiesta Tour Starring The Three Caballeros</p>
+                            <p class="land">World Showcase, Mexico</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/journeyintoimaginationwithfigment.jpg">
+                        <div class="child">
+                            <p class="rideName">Journey Into Imagination With Figment</p>
+                            <p class="land">Future World</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/livingwiththeland.jpg">
+                        <div class="child">
+                            <p class="rideName">Living with the Land</p>
+                            <p class="land">Future World</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/missionspace.jpg">
+                        <div class="child">
+                            <p class="rideName">Mission: Space</p>
+                            <p class="land">Future World</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/soarinaroundtheworldepcot.jpg">
+                        <div class="child">
+                            <p class="rideName">Soarin' Around the World</p>
+                            <p class="land">Future World</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/spaceshipearth.jpg">
+                        <div class="child">
+                            <p class="rideName">Spaceship Earth</p>
+                            <p class="land">Future World</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/testtrack.jpg">
+                        <div class="child">
+                            <p class="rideName">Test Track</p>
+                            <p class="land">Future World</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/theseaswithnemoandfriends.jpg">
+                        <div class="child">
+                            <p class="rideName">The Seas with Nemo & Friends</p>
+                            <p class="land">Future World</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/turtletalkwithcrushepcot.jpg">
+                        <div class="child">
+                            <p class="rideName">Turtle Talk With Crush</p>
+                            <p class="land">Future World</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="landTimesSection">
+        <div id="dateSelection">
+            <form>
+                <label id="date">Date</label>
+                <select id="dateOptions">
+                    <option id="firstDate">Monday (January 25, 2021)</option>
+                    <option id="secondDate">Tuesday (January 26, 2021)</option>
+                    <option id="thirdDate">Wednesday (January 27, 2021)</option>
+                    <option id="fourthDate">Thursday (January 28, 2021)</option>
+                    <option id="fifthDate">Friday (January 29, 2021)</option>
+                    <option id="sixthDate">Saturday (January 30, 2021)</option>
+                    <option id="seventhDate">Sunday (January 31, 2021)</option>
+                </select>
+            </form>
+        </div>
+        <div id="barChartParent">
+            <canvas id="barChart"></canvas>
+          </div>
+    </section>
+
+    <section id="weatherSection">
+        <div id="weatherContainer">
+            <a id="orlandoWeather" class="weatherwidget-io" href="https://forecast7.com/en/28d54n81d38/orlando/?unit=us" data-label_1="ORLANDO" data-label_2="WEATHER" data-theme="original" >ORLANDO WEATHER</a>
+                <script>
+                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                </script>
+        </div>
+    </section>
+    
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="..\progressbar.css">
+    <link rel="stylesheet" href="..\barchart.css">
+    <link rel="stylesheet" href="..\index.css">
+
+    <script src="..\progressbar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="..\barchart.js"></script>
+    <script src="..\index.js"></script>
+    <title>DisneyData</title>
+</head>
+<body>
+
+    <section id="resortNavigationBarSection">
+        <ul id="parks">
+            <li class="activeResort"><a href="#">Disneyland Resort</a>
+              <ul class="dropdown">
+                <li><a href="disneylandparkanaheim.html">Disneyland Park</a></li>
+                <li><a href="disneycaliforniaadventurepark.html">Disney California Adventure Park</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Walt Disney World Resort</a>
+              <ul class="dropdown">
+                <li><a href="animalkingdom.html">Animal Kingdom</a></li>
+                <!-- <li><a href="blizzardbeach.html">Blizzard Beach</a></li> -->
+                <li><a href="epcot.html">Epcot</a></li>
+                <li><a href="hollywoodstudios.html">Hollywood Studios</a></li>
+                <li><a href="magickingdom.html">Magic Kingdom</a></li>
+                <!-- <li><a href="typhoonlagoon.html">Typhoon Lagoon</a></li> -->
+              </ul>
+            </li>
+            <li><a href="#">Disneyland Paris</a>
+              <ul class="dropdown">
+                <li><a href="disneylandparkparis.html">Disneyland Park</a></li>
+                <li><a href="waltdisneystudiospark.html">Walt Disney Studios Park</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Hong Kong Disneyland Resort</a>
+              <ul class="dropdown">
+                <li><a href="disneylandparkhongkong.html">Disneyland Park</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Shanghai Disney Resort</a>
+              <ul class="dropdown">
+                <li><a href="shanghaidisneyland.html">Shanghai Disneyland</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Tokyo Disney Resort</a>
+              <ul class="dropdown">
+                <li><a href="tokyodisneyland.html">Tokyo Disneyland</a></li>
+                <li><a href="tokyodisneysea.html">Tokyo DisneySea</a></li>
+              </ul>
+            </li>
+          </ul>
+    </section>
+
+    <section id="sidebarSection">
+        <div id="sidebar">
+            <div id="carouselSidebarElement" class="sidebarElement">
+                <a href="#carouselSection" class="sidebarImage"></a>
+            </div>
+            <div id="ridesSidebarElement" class="sidebarElement">
+                <a href="#rideTimesSection" class="sidebarImage"></a>
+            </div>
+            <div id="landsSidebarElement" class="sidebarElement">
+                <a href="#landTimesSection" class="sidebarImage"></a>
+            </div>
+            <div id="weatherSidebarElement" class="sidebarElement">
+                <a href="#weatherSection" class="sidebarImage"></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="carouselSection">
+        <div id="slider">
+            <figure>
+              <img src="..\images/carthaycircletheatercarouselimage.jpg">
+              <img src="..\images/grizzlypeakcarouselimage.jpg">
+              <img src="..\images/radiatorspringscarouselimage.jpg">
+              <img src="..\images/pixarpiercarouselimage.jpg">
+              <img src="..\images/carthaycircletheatercarouselimage.jpg">
+            </figure>
+            <div id="indicatorContainer">
+                <span class="indicator activeIndicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+            </div>
+          </div>
+    </section>
+
+    <section id="rideTimesSection">
+        <input id="rideSearch" type="search" placeholder="Search for an attraction...">
+        <div id="ridesContainer">
+            <ul id="rides">
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/animationacademy.jpg">
+                        <div class="child">
+                            <p class="rideName">Animation Academy</p>
+                            <p class="land">Hollywood Land</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/bakerytour.jpg">
+                        <div class="child">
+                            <p class="rideName">The Bakery Tour</p>
+                            <p class="land">Pacific Wharf</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/gamesofpixarpier.jpg">
+                        <div class="child">
+                            <p class="rideName">Games of Pixar Pier</p>
+                            <p class="land">Pixar Pier</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/goldenzephyr.jpg">
+                        <div class="child">
+                            <p class="rideName">Golden Zephyr</p>
+                            <p class="land">Paradise Gardens Park</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/goofysskyschool.jpg">
+                        <div class="child">
+                            <p class="rideName">Goofy's Sky School</p>
+                            <p class="land">Paradise Gardens Park</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/grizzlyriverrun.jpg">
+                        <div class="child">
+                            <p class="rideName">Grizzly River Run</p>
+                            <p class="land">Grizzly Peak</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/guardiansofthegalaxy.jpg">
+                        <div class="child">
+                            <p class="rideName">Guardians of the Galaxy - Mission: BREAKOUT!</p>
+                            <p class="land">Hollywood Land</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/guardiansofthegalaxymonsters.jpg">
+                        <div class="child">
+                            <p class="rideName">Guardians of the Galaxy - Monsters After Dark</p>
+                            <p class="land">Hollywood Land</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/incredicoaster.jpg">
+                        <div class="child">
+                            <p class="rideName">Incredicoaster</p>
+                            <p class="land">Pixar Pier</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/insideoutemotionalwhirlwind.jpg">
+                        <div class="child">
+                            <p class="rideName">Inside Out Emotional Whirlwind</p>
+                            <p class="land">Pixar Pier</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/jessiescrittercarousel.jpg">
+                        <div class="child">
+                            <p class="rideName">Jessie's Critter Carousel</p>
+                            <p class="land">Pixar Pier</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/jumpinjellyfish.jpg">
+                        <div class="child">
+                            <p class="rideName">Jumpin' Jellyfish</p>
+                            <p class="land">Paradise Gardens Park</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/littlemermaid.jpg">
+                        <div class="child">
+                            <p class="rideName">The Little Mermaid ~ Ariel's Undersea Adventure</p>
+                            <p class="land">Paradise Gardens Park</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/luigisrollickinroadsters.jpg">
+                        <div class="child">
+                            <p class="rideName">Luigi's Rollickin' Roadsters</p>
+                            <p class="land">Cars Land</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/matersjunkyardjamboree.jpg">
+                        <div class="child">
+                            <p class="rideName">Mater's Junkyard Jamboree</p>
+                            <p class="land">Cars Land</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/mickeysphilharmagic.jpg">
+                        <div class="child">
+                            <p class="rideName">Mickey's PhilharMagic</p>
+                            <p class="land">Hollywood Land</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/monstersinc.jpg">
+                        <div class="child">
+                            <p class="rideName">Monsters, Inc. Mike & Sulley to the Rescue</p>
+                            <p class="land">Hollywood Land</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/pixarpalaround.jpg">
+                        <div class="child">
+                            <p class="rideName">Pixar Pal-A-Round - Non-Swinging</p>
+                            <p class="land">Pixar Pier</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/pixarpalaround.jpg">
+                        <div class="child">
+                            <p class="rideName">Pixar Pal-A-Round - Swinging</p>
+                            <p class="land">Pixar Pier</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/radiatorspringsracers.jpg">
+                        <div class="child">
+                            <p class="rideName">Radiator Springs Racers</p>
+                            <p class="land">Cars Land</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/redcartrolley.jpg">
+                        <div class="child">
+                            <p class="rideName">Red Car Trolley</p>
+                            <p class="land">Hollywood Land</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/redwoodcreekchallengetrail.jpg">
+                        <div class="child">
+                            <p class="rideName">Redwood Creek Challenge Trail</p>
+                            <p class="land">Grizzly Peak</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/sillysymphonyswings.jpg">
+                        <div class="child">
+                            <p class="rideName">Silly Symphony Swings</p>
+                            <p class="land">Paradise Gardens Park</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/soarinaroundtheworld.jpg">
+                        <div class="child">
+                            <p class="rideName">Soarin' Around the World</p>
+                            <p class="land">Grizzly Peak</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="../images/sorcerersworkshop.jpg">
+                        <div class="child">
+                            <p class="rideName">Sorcerer's Workshop</p>
+                            <p class="land">Hollywood Land</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/toystorymidwaymania.jpg">
+                        <div class="child">
+                            <p class="rideName">Toy Story Midway Mania!</p>
+                            <p class="land">Pixar Pier</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class="rideImage" tabindex="0" src="..\images/turtletalkwithcrush.jpg">
+                        <div class="child">
+                            <p class="rideName">Turtle Talk with Crush</p>
+                            <p class="land">Hollywood Land</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="landTimesSection">
+        <div id="dateSelection">
+            <form>
+                <label id="date">Date</label>
+                <select id="dateOptions">
+                    <option id="firstDate">Monday (January 25, 2021)</option>
+                    <option id="secondDate">Tuesday (January 26, 2021)</option>
+                    <option id="thirdDate">Wednesday (January 27, 2021)</option>
+                    <option id="fourthDate">Thursday (January 28, 2021)</option>
+                    <option id="fifthDate">Friday (January 29, 2021)</option>
+                    <option id="sixthDate">Saturday (January 30, 2021)</option>
+                    <option id="seventhDate">Sunday (January 31, 2021)</option>
+                </select>
+            </form>
+        </div>
+        <div id="barChartParent">
+            <canvas id="barChart"></canvas>
+          </div>
+    </section>
+
+    <section id="weatherSection">
+        <div id="weatherContainer">
+            <a id="anaheimWeather" class="weatherwidget-io" href="https://forecast7.com/en/33d84n117d91/anaheim/?unit=us" data-label_1="ANAHEIM" data-label_2="WEATHER" data-theme="original" >ANAHEIM WEATHER</a>
+                <script>
+                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                </script>
+        </div>
+    </section>
+
+</body>

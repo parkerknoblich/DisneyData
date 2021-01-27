@@ -1,0 +1,10 @@
+#barChartParent {
+  height: 800px;
+  width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#barChart {
+  height: 100%;
+  width: 100%;
+}

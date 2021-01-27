@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="..\progressbar.css">
+    <link rel="stylesheet" href="..\barchart.css">
+    <link rel="stylesheet" href="..\index.css">
+
+    <script src="..\progressbar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="..\barchart.js"></script>
+    <script src="..\index.js"></script>
+    <title>DisneyData</title>
+</head>
+<body>
+
+    <section id="resortNavigationBarSection">
+        <ul id="parks">
+            <li><a href="#">Disneyland Resort</a>
+              <ul class="dropdown">
+                <li><a href="disneylandparkanaheim.html">Disneyland Park</a></li>
+                <li><a href="disneycaliforniaadventurepark.html">Disney California Adventure Park</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Walt Disney World Resort</a>
+              <ul class="dropdown">
+                <li><a href="animalkingdom.html">Animal Kingdom</a></li>
+                <!-- <li><a href="blizzardbeach.html">Blizzard Beach</a></li> -->
+                <li><a href="epcot.html">Epcot</a></li>
+                <li><a href="hollywoodstudios.html">Hollywood Studios</a></li>
+                <li><a href="magickingdom.html">Magic Kingdom</a></li>
+                <!-- <li><a href="typhoonlagoon.html">Typhoon Lagoon</a></li> -->
+              </ul>
+            </li>
+            <li class="activeResort"><a href="#">Disneyland Paris</a>
+              <ul class="dropdown">
+                <li><a href="disneylandparkparis.html">Disneyland Park</a></li>
+                <li><a href="waltdisneystudiospark.html">Walt Disney Studios Park</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Hong Kong Disneyland Resort</a>
+              <ul class="dropdown">
+                <li><a href="disneylandparkhongkong.html">Disneyland Park</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Shanghai Disney Resort</a>
+              <ul class="dropdown">
+                <li><a href="shanghaidisneyland.html">Shanghai Disneyland</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Tokyo Disney Resort</a>
+              <ul class="dropdown">
+                <li><a href="tokyodisneyland.html">Tokyo Disneyland</a></li>
+                <li><a href="tokyodisneysea.html">Tokyo DisneySea</a></li>
+              </ul>
+            </li>
+          </ul>
+    </section>
+
+    <section id="sidebarSection">
+        <div id="sidebar">
+            <div id="carouselSidebarElement" class="sidebarElement">
+                <a href="#carouselSection" class="sidebarImage"></a>
+            </div>
+            <div id="ridesSidebarElement" class="sidebarElement">
+                <a href="#rideTimesSection" class="sidebarImage"></a>
+            </div>
+            <div id="landsSidebarElement" class="sidebarElement">
+                <a href="#landTimesSection" class="sidebarImage"></a>
+            </div>
+            <div id="weatherSidebarElement" class="sidebarElement">
+                <a href="#weatherSection" class="sidebarImage"></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="carouselSection">
+        <div id="slider">
+            <figure>
+              <img src="..\images/sleepingbeautycastlepariscarouselimage.jpg">
+              <img src="..\images/latanièredudragoncarouselimage.jpg">
+              <img src="..\images/spacemountainparis.jpg">
+              <img src="..\images/disneylandparisentrancecarouselimage.jpg">
+              <img src="..\images/sleepingbeautycastlepariscarouselimage.jpg">
+            </figure>
+            <div id="indicatorContainer">
+                <span class="indicator activeIndicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+            </div>
+          </div>
+    </section>
+
+    <section id="rideTimesSection">
+        <input id="rideSearch" type="search" placeholder="Search for an attraction...">
+        <div id="ridesContainer">
+            <ul id="rides">
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/autopiaparis.jpg">
+                        <div class="child">
+                            <p class="rideName">Autopia</p>
+                            <p class="land">Discoveryland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/bigthundermountainrailroadparis.jpg">
+                        <div class="child">
+                            <p class="rideName">Big Thunder Mountain Railroad</p>
+                            <p class="land">Frontierland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/buzzlightyearlaserblast.jpg">
+                        <div class="child">
+                            <p class="rideName">Buzz Lightyear Laser Blast</p>
+                            <p class="land">Discoveryland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/caseyjr.jpg">
+                        <div class="child">
+                            <p class="rideName">Casey Jr.</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/disneylandrailroad.jpg">
+                        <div class="child">
+                            <p class="rideName">Disneyland Railroad</p>
+                            <p class="land">Main Street U.S.A.</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/dumbotheflyingelephant.jpg">
+                        <div class="child">
+                            <p class="rideName">Dumbo the Flying Elephant</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/indianajonesandthetempleofperil.jpg">
+                        <div class="child">
+                            <p class="rideName">Indiana Jones and the Temple of Peril</p>
+                            <p class="land">Adventureland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/itsasmallworldparis.jpg">
+                        <div class="child">
+                            <p class="rideName">'it's a small world'</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/lancelotscarousel.jpg">
+                        <div class="child">
+                            <p class="rideName">Lancelot's Carousel</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/madhattersteacups.jpg">
+                        <div class="child">
+                            <p class="rideName">Mad Hatter's Tea Cups</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/meetmickeymouse.jpg">
+                        <div class="child">
+                            <p class="rideName">Meet Mickey Mouse</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/oribitron.jpg">
+                        <div class="child">
+                            <p class="rideName">Orbitron</p>
+                            <p class="land">Discoveryland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/peterpansflight.jpg">
+                        <div class="child">
+                            <p class="rideName">Peter Pan's Flight</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/phantommanor.jpg">
+                        <div class="child">
+                            <p class="rideName">Phantom Manor</p>
+                            <p class="land">Frontierland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/pinocchiosdaringjourney.jpg">
+                        <div class="child">
+                            <p class="rideName">Pinocchio's Fantastic Journey</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/piratesofthecaribbeanparis.jpg">
+                        <div class="child">
+                            <p class="rideName">Pirates of the Caribbean</p>
+                            <p class="land">Adventureland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/snowwhiteandthesevendwarfs.jpg">
+                        <div class="child">
+                            <p class="rideName">Snow White and the Seven Dwarfs</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/startours.jpg">
+                        <div class="child">
+                            <p class="rideName">Star Tours: The Adventures Continue</p>
+                            <p class="land">Discoveryland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/storybooklandcanalboatsparis.jpg">
+                        <div class="child">
+                            <p class="rideName">Storybook Land Canal Boats</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/spacemountainmission2.jpg">
+                        <div class="child">
+                            <p class="rideName">Space Mountain: Mission 2</p>
+                            <p class="land">Discoveryland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/swissfamilytreehouse.jpg">
+                        <div class="child">
+                            <p class="rideName">Swiss Family Treehouse</p>
+                            <p class="land">Adventureland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/themysteriesofthenautilus.jpg">
+                        <div class="child">
+                            <p class="rideName">The Mysteries of the Nautilus</p>
+                            <p class="land">Discoveryland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/thundermesariverboatlanding.jpg">
+                        <div class="child">
+                            <p class="rideName">Thunder Mesa Riverboat Landing</p>
+                            <p class="land">Frontierland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="landTimesSection">
+        <div id="dateSelection">
+            <form>
+                <label id="date">Date</label>
+                <select id="dateOptions">
+                    <option id="firstDate">Monday (January 25, 2021)</option>
+                    <option id="secondDate">Tuesday (January 26, 2021)</option>
+                    <option id="thirdDate">Wednesday (January 27, 2021)</option>
+                    <option id="fourthDate">Thursday (January 28, 2021)</option>
+                    <option id="fifthDate">Friday (January 29, 2021)</option>
+                    <option id="sixthDate">Saturday (January 30, 2021)</option>
+                    <option id="seventhDate">Sunday (January 31, 2021)</option>
+                </select>
+            </form>
+        </div>
+        <div id="barChartParent">
+            <canvas id="barChart"></canvas>
+          </div>
+    </section>
+
+    <section id="weatherSection">
+        <div id="weatherContainer">
+            <a id="parisWeather" class="weatherwidget-io" href="https://forecast7.com/en/48d862d35/paris/" data-label_1="PARIS" data-label_2="WEATHER" data-theme="original" >PARIS WEATHER</a>
+                <script>
+                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                </script>
+        </div>
+    </section>
+    
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="..\progressbar.css">
+    <link rel="stylesheet" href="..\barchart.css">
+    <link rel="stylesheet" href="..\index.css">
+
+    <script src="..\progressbar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="..\barchart.js"></script>
+    <script src="..\index.js"></script>
+    <title>DisneyData</title>
+</head>
+<body>
+
+    <section id="resortNavigationBarSection">
+        <ul id="parks">
+            <li><a href="#">Disneyland Resort</a>
+              <ul class="dropdown">
+                <li><a href="disneylandparkanaheim.html">Disneyland Park</a></li>
+                <li><a href="disneycaliforniaadventurepark.html">Disney California Adventure Park</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Walt Disney World Resort</a>
+              <ul class="dropdown">
+                <li><a href="animalkingdom.html">Animal Kingdom</a></li>
+                <!-- <li><a href="blizzardbeach.html">Blizzard Beach</a></li> -->
+                <li><a href="epcot.html">Epcot</a></li>
+                <li><a href="hollywoodstudios.html">Hollywood Studios</a></li>
+                <li><a href="magickingdom.html">Magic Kingdom</a></li>
+                <!-- <li><a href="typhoonlagoon.html">Typhoon Lagoon</a></li> -->
+              </ul>
+            </li>
+            <li><a href="#">Disneyland Paris</a>
+              <ul class="dropdown">
+                <li><a href="disneylandparkparis.html">Disneyland Park</a></li>
+                <li><a href="waltdisneystudiospark.html">Walt Disney Studios Park</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Hong Kong Disneyland Resort</a>
+              <ul class="dropdown">
+                <li><a href="disneylandparkhongkong.html">Disneyland Park</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Shanghai Disney Resort</a>
+              <ul class="dropdown">
+                <li><a href="shanghaidisneyland.html">Shanghai Disneyland</a></li>
+              </ul>
+            </li>
+            <li class="activeResort"><a href="#">Tokyo Disney Resort</a>
+              <ul class="dropdown">
+                <li><a href="tokyodisneyland.html">Tokyo Disneyland</a></li>
+                <li><a href="tokyodisneysea.html">Tokyo DisneySea</a></li>
+              </ul>
+            </li>
+          </ul>
+    </section>
+
+    <section id="sidebarSection">
+        <div id="sidebar">
+            <div id="carouselSidebarElement" class="sidebarElement">
+                <a href="#carouselSection" class="sidebarImage"></a>
+            </div>
+            <div id="ridesSidebarElement" class="sidebarElement">
+                <a href="#rideTimesSection" class="sidebarImage"></a>
+            </div>
+            <div id="landsSidebarElement" class="sidebarElement">
+                <a href="#landTimesSection" class="sidebarImage"></a>
+            </div>
+            <div id="weatherSidebarElement" class="sidebarElement">
+                <a href="#weatherSection" class="sidebarImage"></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="carouselSection">
+        <div id="slider">
+            <figure>
+              <img src="..\images/cinderellacastletokyo.jpg">
+              <img src="..\images/splashmountaintokyocarouselimage.jpg">
+              <img src="..\images/piratesofthecaribbeantokyocarouselimage.jpg">
+              <img src="..\images/itsasmallworldtokyocarouselimage.jpg">
+              <img src="..\images/cinderellacastletokyo.jpg">
+            </figure>
+            <div id="indicatorContainer">
+                <span class="indicator activeIndicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+            </div>
+          </div>
+    </section>
+
+    <section id="rideTimesSection">
+        <input id="rideSearch" type="search" placeholder="Search for an attraction...">
+        <div id="ridesContainer">
+            <ul id="rides">
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/alicesteaparty.jpg">
+                        <div class="child">
+                            <p class="rideName">Alice's Tea Party</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/beaverbrothersexplorercanoes.jpg">
+                        <div class="child">
+                            <p class="rideName">Beaver Brothers Explorer Canoes</p>
+                            <p class="land">Critter Country</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/bigthundermountain.jpg">
+                        <div class="child">
+                            <p class="rideName">Big Thunder Mountain</p>
+                            <p class="land">Westernland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/buzzlightyearsaastroblasters.jpg">
+                        <div class="child">
+                            <p class="rideName">Buzz Lightyear's Astro Blasters</p>
+                            <p class="land">Tomorrowland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/castlecarousel.jpg">
+                        <div class="child">
+                            <p class="rideName">Castle Carrousel</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/dumbotheflyingelephant.jpg">
+                        <div class="child">
+                            <p class="rideName">Dumbo the Flying Elephant</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/gadgetsgocoastertokyo.jpg">
+                        <div class="child">
+                            <p class="rideName">Gadget's Go Coaster</p>
+                            <p class="land">Toontown</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/hauntedmansiontokyo.jpg">
+                        <div class="child">
+                            <p class="rideName">Haunted Mansion</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/itsasmallworldtokyo.jpg">
+                        <div class="child">
+                            <p class="rideName">"it's a small world"</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/junglecruisetokyo.jpg">
+                        <div class="child">
+                            <p class="rideName">Jungle Cruise</p>
+                            <p class="land">Adventureland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/marktwainriverboattokyo.jpg">
+                        <div class="child">
+                            <p class="rideName">Mark Twain Riverboat</p>
+                            <p class="land">Westernland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/monstersincrideandgoseek.jpg">
+                        <div class="child">
+                            <p class="rideName">Monsters Inc. Ride & Go Seek</p>
+                            <p class="land">Tomorrowland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/peterpansflight.jpg">
+                        <div class="child">
+                            <p class="rideName">Peter Pan's Flight</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/pinocchiosdaringjourneytokyo.jpg">
+                        <div class="child">
+                            <p class="rideName">Pinocchio's Daring Journey</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/piratesofthecaribbeantokyo.jpg">
+                        <div class="child">
+                            <p class="rideName">Pirates of the Caribbean</p>
+                            <p class="land">Adventureland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/poohshunnyhunt.jpg">
+                        <div class="child">
+                            <p class="rideName">Pooh's Hunny Hunt</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/rogerrabbitscartoonspintokyo.jpg">
+                        <div class="child">
+                            <p class="rideName">Roger Rabbit's Car Toon Spin</p>
+                            <p class="land">Toontown</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/snowwhitesadventures.jpg">
+                        <div class="child">
+                            <p class="rideName">Snow White's Adventures</p>
+                            <p class="land">Fantasyland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/spacemountaintokyo.jpg">
+                        <div class="child">
+                            <p class="rideName">Space Mountain</p>
+                            <p class="land">Tomorrowland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/splashmountaintokyo.jpg">
+                        <div class="child">
+                            <p class="rideName">Splash Mountain</p>
+                            <p class="land">Critter Country</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/startours.jpg">
+                        <div class="child">
+                            <p class="rideName">Star Tours: The Adventures Continue</p>
+                            <p class="land">Tomorrowland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/swissfamilytreehousetokyo.jpg">
+                        <div class="child">
+                            <p class="rideName">Swiss Family Treehouse</p>
+                            <p class="land">Adventureland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/theenchantedtikiroom.jpg">
+                        <div class="child">
+                            <p class="rideName">The Enchanted Tiki Room</p>
+                            <p class="land">Adventureland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/thehappyridewithbaymax.jpg">
+                        <div class="child">
+                            <p class="rideName">The Happy Ride with Baymax</p>
+                            <p class="land">Tomorrowland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="parent">
+                        <img class= "rideImage" tabindex="0" src="..\images/westernriverrailroad.jpg">
+                        <div class="child">
+                            <p class="rideName">Western River Railroad</p>
+                            <p class="land">Adventureland</p>
+                            <div class="progress"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="landTimesSection">
+        <div id="dateSelection">
+            <form>
+                <label id="date">Date</label>
+                <select id="dateOptions">
+                    <option id="firstDate">Monday (January 25, 2021)</option>
+                    <option id="secondDate">Tuesday (January 26, 2021)</option>
+                    <option id="thirdDate">Wednesday (January 27, 2021)</option>
+                    <option id="fourthDate">Thursday (January 28, 2021)</option>
+                    <option id="fifthDate">Friday (January 29, 2021)</option>
+                    <option id="sixthDate">Saturday (January 30, 2021)</option>
+                    <option id="seventhDate">Sunday (January 31, 2021)</option>
+                </select>
+            </form>
+        </div>
+        <div id="barChartParent">
+            <canvas id="barChart"></canvas>
+          </div>
+    </section>
+
+    <section id="weatherSection">
+        <div id="weatherContainer">
+            <a id="tokyoWeather" class="weatherwidget-io" href="https://forecast7.com/en/35d71139d73/tokyo/" data-label_1="TOKYO" data-label_2="WEATHER" data-theme="original" >TOKYO WEATHER</a>
+                <script>
+                    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                </script>
+        </div>
+    </section>
+    
+</body>
+</html>

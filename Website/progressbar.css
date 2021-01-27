@@ -1,0 +1,15 @@
+#container {
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    top: 12%;
+  }
+
+  .progress {
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    top: 12%;
+  }
