@@ -82,28 +82,28 @@
         url = "http://localhost:8000/epcotwaittimes";
         break;
       case 5:
-        url = "http://localhost:8000/times";
+        url = "http://localhost:8000/hollywoodstudioswaittimes";
         break;
       case 6:
-        url = "http://localhost:8000/times";
+        url = "http://localhost:8000/magickingdomwaittimes";
         break;
       case 7:
-        url = "http://localhost:8000/times";
+        url = "http://localhost:8000/disneylandparkpariswaittimes";
         break;
       case 8:
-        url = "http://localhost:8000/times";
+        url = "http://localhost:8000/waltdisneystudioswaittimes";
         break;
       case 9:
-        url = "http://localhost:8000/times";
+        url = "http://localhost:8000/disneylandparkhongkongwaittimes";
         break;
       case 10:
-        url = "http://localhost:8000/times";
+        url = "http://localhost:8000/shanghaidisneylandwaittimes";
         break;
       case 11:
-        url = "http://localhost:8000/times";
+        url = "http://localhost:8000/tokyodisneylandwaittimes";
         break;
       case 12:
-        url = "http://localhost:8000/times";
+        url = "http://localhost:8000/tokyodisneyseawaittimes";
         break;
     }
     fetch(url)
