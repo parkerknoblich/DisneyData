@@ -502,16 +502,22 @@
     </section>
 
     <section id="landTimesSection">
-        <div id="selectDate">
-            <select>
-              <option>Monday January 25, 2021</option>
-              <option>Tuesday January 26, 2021</option>
-              <option>Wednesday January 27, 2021</option>
-              <option>Thursday January 28, 2021</option>
-              <option>Friday January 29, 2021</option>
-              <option>Saturday January 30, 2021</option>
-              <option>Sunday January 31, 2021</option>
-            </select>
+        <div id="dateAndTimeSelection">
+            <div id="selectDate">
+                <select>
+                  <option>Monday January 25, 2021</option>
+                  <option>Tuesday January 26, 2021</option>
+                  <option>Wednesday January 27, 2021</option>
+                  <option>Thursday January 28, 2021</option>
+                  <option>Friday January 29, 2021</option>
+                  <option>Saturday January 30, 2021</option>
+                  <option>Sunday January 31, 2021</option>
+                </select>
+            </div>
+            <div id="selectTime">
+                <input type="time" id="time"
+                        min="09:00" max="18:00">
+            </div>
         </div>
         <div id="barChartParent">
             <canvas id="barChart"></canvas>
