@@ -48,6 +48,33 @@
   "Meet Mickey Mouse at Town Square Theater", "Meet Rapunzel and Tiana at Princess Fairytale Hall", "Meet Tinker Bell at Town Square Theater",
   "Sorcerers of the Magic Kingdom", "The Crystal Palace", "The Hall of Presidents", "The Plaza Restaurant", "Tony's Town Square Restaurant",
   "Walt Disney World Railroad - Fantasyland", "Walt Disney World Railroad - Frontierland"];
+  const disneylandParkParisRidesToRemove = ["Alice's Curious Labyrinth", "Adventure Isle", "Discovery Arcade", "Disneyland Railroad", "Disneyland Railroad Discoveryland Station",
+  "Disneyland Railroad Fantasyland Station", "Disneyland Railroad Frontierland Depot", "Frontierland Playground", "Horse-Drawn Streetcars",
+  "La Galerie de la Belle au Bois Dormant", "La Tanière du Dragon", "Le Passage Enchanté d'Aladdin", "Liberty Arcade", "Main Street Vehicles",
+  "Pirate Galleon", "Pirates' Beach", "Princess Pavilion", "Rustler Roundup Shootin' Gallery", "Sleeping Beauty Castle",
+  "Welcome to Starport: A Star Wars Encounter"];
+  const waltDisneyStudiosParkRidesToRemove = ["Animation Celebration – Frozen : A Musical Invitation", "Armageddon : les Effets Spéciaux",
+  "Art of Disney Animation®", "Disney Studio 1", "Rock 'n' Roller Coaster starring Aerosmith", "Studio Tram Tour®: Behind the Magic",
+  "Top secret - Under construction: The Avengers new headquarters"];
+  const disneylandParkHongKongRidesToRemove = ["Animation Academy", "Building a Dream: The Magic Behind a Disney Castle",
+  "Clopin's Festival of Foods", "Comet Cafe", "Fairy Tale Forest - presented by PANDORA", "Fantasy Gardens",
+  "Hong Kong Disneyland Railroad – Fantasyland Station", "Iron Man Tech Showcase - Presented by Stark Industries",
+  "Main Street Vehicles", "River View Cafe", "STAR WARS™: Command Post", "Tahitian Terrace",
+  "The Royal Reception Hall"];
+  const shanghaiDisneylandRidesToRemove = ["Alice in Wonderland Maze", "Become Iron Man", "Buzz Lightyear Planet Rescue (Standby Pass Required)",
+  "Camp Discovery", "Challenge Trails at Camp Discovery", "Challenge Trails at Camp Discovery (Standby Pass Required)", "Marvel Universe",
+  "“Once Upon a Time” Adventure", "Peter Pan’s Flight (Standby Pass Required)", "Roaring Rapids (Standby Pass Required)", "Selfie Spot with Captain America", "Selfie Spot with Disney Jungle Characters",
+  "Selfie Spot with Mickey", "Selfie Spot with Princesses", "Selfie Spot with Spider Man", "Seven Dwarfs Mine Train (Standby Pass Required)",
+  "Shipwreck Shore", "Siren's Revenge", "Soaring Over the Horizon (Standby Pass Required)", "Stitch Encounter", 
+  "The Many Adventures of Winnie the Pooh (Standby Pass Required)", "TRON Lightcycle Power Run – Presented by Chevrolet (Standby Pass Required)",
+  "TRON Realm, Chevrolet Digital Challenge", "Vista Trail at Camp Discovery"];
+  const tokyoDisneylandRidesToRemove = ["Chip 'n Dale's Treehouse", "Cinderella's Fairy Tale Hall", "Country Bear Theater",
+  "Donald's Boat", "Enchanted Tale of Beauty and the Beast", "Goofy's Paint 'n' Play House", "Minnie's House", "Omnibus",
+  "Penny Arcade", "Stitch Encounter", "Toon Park", "Westernland Shootin' Gallery"];
+  const tokyoDisneySeaRidesToRemove = ["Ariel's Playground", "Big City Vehicles", "DisneySea Electric Railway (Port Discovery Station)",
+  "DisneySea Transit Steamer Line (Lost River Delta Dock)", "DisneySea Transit Steamer Line (Mediterranean Harbor Dock)",
+  "Fortress Explorations", "Fortress Explorations &quotThe Leonardo Challenge&quot", "Mermaid Lagoon Theater",
+  "Sindbad's Storybook Voyage", "The Magic Lamp Theater", "Turtle Talk"];
 
   window.addEventListener("load", setUp);
   window.addEventListener("load", getWaitTimes);
@@ -80,21 +107,27 @@
     } else if (document.URL.includes("disneylandparkparis")) {
       activeParkID = 7;
       currentLands = disneylandParkParisLands;
+      ridesToRemove = disneylandParkParisRidesToRemove;
     } else if (document.URL.includes("waltdisneystudiospark")) {
       activeParkID = 8;
       currentLands = waltDisneyStudiosParkLands;
+      ridesToRemove = waltDisneyStudiosParkRidesToRemove
     } else if (document.URL.includes("disneylandparkhongkong")) {
       activeParkID = 9;
       currentLands = disneylandParkHongKongLands;
+      ridesToRemove = disneylandParkHongKongRidesToRemove;
     } else if (document.URL.includes("shanghaidisneyland")) {
       activeParkID = 10;
       currentLands = shanghaiDisneylandLands;
+      ridesToRemove = shanghaiDisneylandRidesToRemove;
     } else if (document.URL.includes("tokyodisneyland")) {
       activeParkID = 11;
       currentLands = tokyoDisneylandLands;
+      ridesToRemove = tokyoDisneylandRidesToRemove;
     } else if (document.URL.includes("tokyodisneysea")) {
       activeParkID = 12;
       currentLands = tokyoDisneySeaLands;
+      ridesToRemove = tokyoDisneySeaRidesToRemove;
     }
     displayAverageWaitTimes();
   }
@@ -124,7 +157,7 @@
         url = "http://localhost:8000/disneylandparkpariswaittimes";
         break;
       case 8:
-        url = "http://localhost:8000/waltdisneystudioswaittimes";
+        url = "http://localhost:8000/waltdisneystudiosparkwaittimes";
         break;
       case 9:
         url = "http://localhost:8000/disneylandparkhongkongwaittimes";

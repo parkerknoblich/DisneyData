@@ -107,44 +107,4 @@
         }
     }
 
-    // function getWaitTimes() {
-    //     let url = "http://localhost:8000/times";
-    //     fetch(url)
-    //         .then(response => response.json())
-    //         .then(function(response) {
-    //             return response.sort(sortRides("name"))
-    //         })
-    //         .then(displayWaitTimes);
-    // }
-
-    // function sortRides(key) {
-    //     return function(a, b) {
-    //         return a[key].replace(/\W/g, '').localeCompare(b[key].replace(/\W/g, ''));
-    //     }
-    // }
-
-    // function displayWaitTimes(responseData) {
-    //     for (let i = 0; i < responseData.length; i++) {
-    //         console.log(responseData[i].name + " " + responseData[i].waitTime);
-    //     }
-    //     let allRidesImages = document.getElementsByClassName("rideImage");
-    //     for (let i = 0; i < allRidesImages.length; i++) {
-    //         allRidesImages[i].addEventListener("click", function() {
-    //             setTimeout(displayIndividualWaitTime, 350, 30, i);
-    //         }, {once : true});
-    //     }
-    // }
-
-    // function displayIndividualWaitTime(num, rideNumber) {
-    //     let color;
-    //     if (num <= 30) {
-    //         color = "#39ff14"
-    //     } else if (num > 30 && num <= 60) {
-    //         color = "#FFFF00";
-    //     } else {
-    //         color = "#FF0000";
-    //     }
-    //     animateProgressBar(num, color, rideNumber);
-    // }
-
 }) ();
