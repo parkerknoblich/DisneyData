@@ -362,7 +362,7 @@ padding-left: 0;
   /* justify-content: space-evenly; */
 }
 
-#selectDate select, input {
+#selectDate select, #selectTime {
   background-color: #0563af;
   color: white;
   padding: 12px;
@@ -379,15 +379,15 @@ select {
   text-align-last: center;
 }
 
-select:hover, input::-webkit-calendar-picker-indicator {
+select:hover, #selectTime::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-input {
+#selectTime {
   width: 226px;
 }
 
-input::-webkit-calendar-picker-indicator {
+#selectTime::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
 
