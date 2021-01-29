@@ -6,11 +6,19 @@
     <link rel="stylesheet" href="..\barchart.css">
     <link rel="stylesheet" href="..\index.css">
 
+    <!-- for jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/circliful/1.0.2/js/jquery.circliful.min.js"></script>
-    <script src="..\progressbar.js"></script>
 
+    <!-- for ride wait time progress circles -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/circliful/1.0.2/js/jquery.circliful.min.js"></script>
+
+    <!-- for land wait time progress bars -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+    <!-- for dates -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    
+    <script src="..\progressbar.js"></script>    
     <script src="..\barchart.js"></script>
     <script src="..\index.js"></script>
     <title>DisneyData</title>
@@ -507,13 +515,13 @@
         <div id="dateAndTimeSelection">
             <div id="selectDate">
                 <select>
-                  <option>Monday January 25, 2021</option>
-                  <option>Tuesday January 26, 2021</option>
-                  <option>Wednesday January 27, 2021</option>
-                  <option>Thursday January 28, 2021</option>
-                  <option>Friday January 29, 2021</option>
-                  <option>Saturday January 30, 2021</option>
-                  <option>Sunday January 31, 2021</option>
+                  <option></option>
+                  <option></option>
+                  <option></option>
+                  <option></option>
+                  <option></option>
+                  <option></option>
+                  <option></option>
                 </select>
             </div>
             <!-- <div id="selectTime">

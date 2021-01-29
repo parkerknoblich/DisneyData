@@ -48,6 +48,7 @@
     let slideIndex = 0;
 
     window.addEventListener("load", setUp);
+    window.addEventListener("load", displayDates);
     // window.addEventListener("load", getWaitTimes);
 
     function setUp() {
@@ -106,5 +107,19 @@
             }
         }
     }
+
+    function displayDates() {
+        let days = [];
+        let daysRequired = 7
+        
+        for (let i = 0; i < daysRequired; i++) {
+          days.push( moment().add(i, 'days').format('dddd MMMM Do, YYYY') )
+        }
+        let options = document.querySelectorAll("option");
+        for (let i = 0; i < options.length; i++) {
+          options[i].innerHTML = days[i];
+        }
+        console.log(days)
+      }
 
 }) ();
