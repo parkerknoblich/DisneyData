@@ -1,19 +1,19 @@
 const express = require("express");
-const Themeparks = require("themeparks");
+const ThemeParks = require("themeparks");
 const cors = require("cors");
 
-const DisneylandResortMagicKingdom = new Themeparks.Parks.DisneylandResortMagicKingdom();
-const DisneylandResortCaliforniaAdventure = new Themeparks.Parks.DisneylandResortCaliforniaAdventure();
-const WaltDisneyWorldAnimalKingdom = new Themeparks.Parks.WaltDisneyWorldAnimalKingdom();
-const WaltDisneyWorldEpcot = new Themeparks.Parks.WaltDisneyWorldEpcot();
-const WaltDisneyWorldHollywoodStudios = new Themeparks.Parks.WaltDisneyWorldHollywoodStudios();
-const WaltDisneyWorldMagicKingdom = new Themeparks.Parks.WaltDisneyWorldMagicKingdom();
-const DisneylandParisMagicKingdom = new Themeparks.Parks.DisneylandParisMagicKingdom();
-const DisneylandParisWaltDisneyStudios = new Themeparks.Parks.DisneylandParisWaltDisneyStudios();
-const HongKongDisneyland = new Themeparks.Parks.HongKongDisneyland();
-const ShanghaiDisneyResortMagicKingdom = new Themeparks.Parks.ShanghaiDisneyResortMagicKingdom();
-const TokyoDisneyResortMagicKingdom = new Themeparks.Parks.TokyoDisneyResortMagicKingdom();
-const TokyoDisneyResortDisneySea = new Themeparks.Parks.TokyoDisneyResortDisneySea();
+const DisneylandResortMagicKingdom = new ThemeParks.Parks.DisneylandResortMagicKingdom();
+const DisneylandResortCaliforniaAdventure = new ThemeParks.Parks.DisneylandResortCaliforniaAdventure();
+const WaltDisneyWorldAnimalKingdom = new ThemeParks.Parks.WaltDisneyWorldAnimalKingdom();
+const WaltDisneyWorldEpcot = new ThemeParks.Parks.WaltDisneyWorldEpcot();
+const WaltDisneyWorldHollywoodStudios = new ThemeParks.Parks.WaltDisneyWorldHollywoodStudios();
+const WaltDisneyWorldMagicKingdom = new ThemeParks.Parks.WaltDisneyWorldMagicKingdom();
+const DisneylandParisMagicKingdom = new ThemeParks.Parks.DisneylandParisMagicKingdom();
+const DisneylandParisWaltDisneyStudios = new ThemeParks.Parks.DisneylandParisWaltDisneyStudios();
+const HongKongDisneyland = new ThemeParks.Parks.HongKongDisneyland();
+const ShanghaiDisneyResortMagicKingdom = new ThemeParks.Parks.ShanghaiDisneyResortMagicKingdom();
+const TokyoDisneyResortMagicKingdom = new ThemeParks.Parks.TokyoDisneyResortMagicKingdom();
+const TokyoDisneyResortDisneySea = new ThemeParks.Parks.TokyoDisneyResortDisneySea();
 
 const app = express();
 const port = 8000;
@@ -21,7 +21,6 @@ const port = 8000;
 app.use(cors());
 
 app.get("/disneylandparkanaheimwaittimes", (req, res) => {
-    // foo();
     DisneylandResortMagicKingdom.GetWaitTimes().then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
@@ -116,9 +115,5 @@ app.get("/tokyodisneyseawaittimes", (req, res) => {
         console.error(error);
     });
 });
-
-// function foo() {
-//     console.log("PENIS");
-// }
 
 app.listen(port);

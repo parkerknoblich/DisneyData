@@ -132,6 +132,8 @@
     displayAverageWaitTimes();
   }
 
+  
+
   function getWaitTimes() {
     let url;
     switch (activeParkID) {

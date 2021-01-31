@@ -117,7 +117,8 @@ padding-left: 0;
   position: fixed;
   margin-top: 35vh;
   right: 1.5em;
-  background-image: url("images/sidebarbackgroundimage.jpg");
+  /* background-image: url("images/sidebarbackgroundimage.jpg"); */
+  background-color:rgba(255, 255, 255, 0.7);
   background-repeat: no-repeat;
   background-size: cover;
   border: 1px solid transparent;
