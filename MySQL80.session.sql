@@ -1,1 +1,1 @@
-SELECT * FROM lands;
+SELECT * FROM timepoints;
