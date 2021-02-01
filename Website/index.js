@@ -115,7 +115,7 @@
         for (let i = 0; i < daysRequired; i++) {
           days.push( moment().add(i, 'days').format('dddd MMMM Do, YYYY') )
         }
-        let options = document.querySelectorAll("option");
+        let options = document.querySelectorAll("#selectDate option");
         for (let i = 0; i < options.length; i++) {
           options[i].innerHTML = days[i];
         }

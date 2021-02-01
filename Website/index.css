@@ -358,19 +358,16 @@ padding-left: 0;
   margin-top: 5em;
 }
 
-#dateAndTimeSelection {
-  display: flex;
-  /* justify-content: space-evenly; */
-}
 
-#selectDate select, #selectTime {
-  background-color: #0563af;
+#selectDate select, #selectTime select {
+  background-color: #33BBFF;
   color: white;
   padding: 12px;
   width: 250px;
   border: none;
   font-size: 0.9em;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  font-weight: bolder;
+  /* box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); */
   -webkit-appearance: button;
   appearance: button;
   outline: none;
@@ -380,16 +377,16 @@ select {
   text-align-last: center;
 }
 
-select:hover, #selectTime::-webkit-calendar-picker-indicator {
+select:hover {
   cursor: pointer;
 }
 
 #selectTime {
-  width: 226px;
+  margin-top: 3em;
 }
 
-#selectTime::-webkit-calendar-picker-indicator {
-  filter: invert(1);
+#selectTime > select {
+  width: 7em;
 }
 
                             /* weatherSection */

@@ -1,19 +1,15 @@
 const express = require("express");
 const ThemeParks = require("themeparks");
 const cors = require("cors");
-// const mysql = require("mysql2/promise");
-const mysql = require("mysql2");
+const mysql = require("mysql2/promise");
 
-const database = mysql.createConnection({
+const database = mysql.createPool({
     host: "localhost",
     port: "3306",
     user: "root",
     password: "98DisneyData349621",
     database: "times"
 });
-
-
-
 
 const DisneylandResortMagicKingdom = new ThemeParks.Parks.DisneylandResortMagicKingdom();
 const DisneylandResortCaliforniaAdventure = new ThemeParks.Parks.DisneylandResortCaliforniaAdventure();
@@ -39,31 +35,21 @@ app.get("/test", function(req, res) {
     });
 });
 
-app.get("/testSQL", function(req, res) {
+app.get("/testSQL", async function(req, res) {
     let foo = [];
-    database.query(
-        "SELECT * FROM rides WHERE ride_id = 1",
-        function(err, results, fields) {
-            foo = results;
-            res.send(foo);
-            // console.log(results);
-            // console.log(fields);
-        }
-    );
-    // let foo = [];
-    // try {
-    //     foo = await testSQLFunction(foo);
-    //     res.json(foo);
-    // } catch (error) {
-    //     res.send("You suck massive weeeeen.");
-    // }
+    try {
+        foo = await testSQLFunction(foo);
+        res.json(foo);
+    } catch (error) {
+        res.send("You suck massive weeeeen.");
+    }
 });
 
-// async function testSQLFunction(foo) {
-//     let result = database.query("SELECT * FROM rides WHERE resort_id = 1");
-//     foo.push(result);
-//     return foo;
-// }
+async function testSQLFunction(foo) {
+    let [result] = await database.query("SELECT ride_name FROM rides WHERE ride_id = 1");
+    foo.push(result);
+    return foo;
+}
 
 app.get("/disneylandparkanaheimwaittimes", (req, res) => {
     DisneylandResortMagicKingdom.GetWaitTimes().then((rideTimes) => {
