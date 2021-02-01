@@ -29,26 +29,26 @@ const port = 8000;
 
 app.use(cors());
 
-app.get("/test", function(req, res) {
-    WaltDisneyWorldMagicKingdom.GetOpeningTimes().then((foo) => {
-        res.send(foo);
-    });
-});
-
-app.get("/testSQL", async function(req, res) {
-    let foo = [];
+app.get("/landtimes/:day/:time", async function(req, res) {
+    let day = req.params["day"];
+    let time = req.params["time"];
+    // res.send(day + " " + time);
+    let result = [];
     try {
-        foo = await testSQLFunction(foo);
-        res.json(foo);
+        result = await getLandTimes(result, day, time);
+        res.json(result);
     } catch (error) {
-        res.send("You suck massive weeeeen.");
+        res.json("ERROR!");
     }
 });
 
-async function testSQLFunction(foo) {
-    let [result] = await database.query("SELECT ride_name FROM rides WHERE ride_id = 1");
-    foo.push(result);
-    return foo;
+async function getLandTimes(result, day, time) {
+    let timeToGet = "time_" + time;
+    let foo = "ride_id";
+    let foo2 = "SELECT " + timeToGet;
+    let querySQL = foo2 + " FROM timepoints WHERE ride_id = 1 AND park_day = ?";
+    let [queryResult] = await database.query(querySQL, [day]);
+    return queryResult;
 }
 
 app.get("/disneylandparkanaheimwaittimes", (req, res) => {

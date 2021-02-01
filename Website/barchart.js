@@ -77,7 +77,7 @@
   "Sindbad's Storybook Voyage", "The Magic Lamp Theater", "Turtle Talk"];
 
   window.addEventListener("load", setUp);
-  window.addEventListener("load", getWaitTimes);
+  window.addEventListener("load", getRideWaitTimes);
 
   function setUp() {  
     if (document.URL.includes("disneylandparkanaheim")) {
@@ -130,11 +130,36 @@
       ridesToRemove = tokyoDisneySeaRidesToRemove;
     }
     displayAverageWaitTimes();
+    let dateSelector = document.querySelector("#selectDate select");
+    dateSelector.addEventListener("change", function() {
+      getLandWaitTimes();
+    });
+    let timeSelector = document.querySelector("#selectTime select");
+    timeSelector.addEventListener("change", function() {
+      getLandWaitTimes();
+    });
   }
 
-  
+  function getLandWaitTimes() {
+    let dateSelector = document.querySelector("#selectDate select");
+    let day = dateSelector.options[dateSelector.selectedIndex].text.split(" ")[0];
+    let timeSelector = document.querySelector("#selectTime select");
+    let time = timeSelector.options[timeSelector.selectedIndex].text;
+    time = time.replace(" ", "");
+    time = time.replace(":", "");
+    let url = "http://localhost:8000/landtimes/" + day + "/" + time;
+    fetch(url)
+      .then(response => response.text())
+      .then(foo);
+  }
 
-  function getWaitTimes() {
+  function foo(response) {
+    console.log(response);
+  }
+
+
+
+  function getRideWaitTimes() {
     let url;
     switch (activeParkID) {
       case 1:
@@ -182,7 +207,7 @@
         .then(function(response) {
           return filterRides(response);
         })
-        .then(displayWaitTimes);
+        .then(displayAllRideWaitTimes);
   }
 
   function sortRides(key) {
@@ -202,19 +227,19 @@
       return filteredArray;
   }
 
-  function displayWaitTimes(responseData) {
+  function displayAllRideWaitTimes(responseData) {
     for (let i = 0; i < responseData.length; i++) {
         console.log(responseData[i].name + " " + responseData[i].waitTime);
     }
     let allRidesImages = document.getElementsByClassName("rideImage");
     for (let i = 0; i < allRidesImages.length; i++) {
         allRidesImages[i].addEventListener("click", function() {
-            setTimeout(displayIndividualWaitTime, 350, responseData[i].waitTime, i);
+            setTimeout(displayIndividualRideWaitTime, 350, responseData[i].waitTime, i);
         }, {once : true});
     }
   }
 
-  function displayIndividualWaitTime(num, rideNumber) {
+  function displayIndividualRideWaitTime(num, rideNumber) {
     let color;
     if (num <= 30) {
         color = "#39ff14"
