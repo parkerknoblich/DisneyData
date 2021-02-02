@@ -1,0 +1,94 @@
+/* bannerSection */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#imageContainer {
+    width: 100%;
+    height: 85vh;
+    margin-top: 5em;
+    position: relative;
+    overflow: hidden;
+}
+
+#bannerImage {
+    width: 100%;
+    height: 100%;
+    transition: all 7s;
+}
+
+#imageContainer:hover > #bannerImage {
+    transform: scale(1.5);
+}
+
+#bannerImageOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba( 0, 0, 0, 0.6);
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#bannerTextHeader {
+    color: white;
+    font-size: 10em;
+    font-weight: bolder;
+}
+
+#bannerTextDescription {
+    color: #33BBFF;
+    font-size: 2em;
+}
+
+/* websiteDescriptionSection */
+#timeIconsContainer {
+    width: 100%;
+    height: 25em;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5em;
+}
+
+.timeIcon > img{
+    width: 20em;
+    height: 85%;
+}
+
+.iconText {
+    width: 20em;
+    text-align: center;
+    /* font-weight: bolder; */
+}
+
+#enterParksContainer {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    border: 2px solid black;
+    width: 10em;
+    height: 2em;
+    font-size: 1.7em;
+    margin-top: 0.8em;
+    margin-bottom: 1em;
+    background-color:  white;
+    transition: all 1s;
+    background: linear-gradient(to left, white 50%, #33BBFF 50%);
+    background-size: 200% 100%;
+    background-position:right bottom;
+}
+
+button:hover {
+    background-position: left bottom;
+    transition: all 1s ease;
+    color: white;
+    border-color: #33BBFF;
+    cursor: pointer;
+}
