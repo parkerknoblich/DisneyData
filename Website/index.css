@@ -40,14 +40,15 @@ a:hover {
   margin: 0;
   padding-left: 0;
   display: flex;
-  height: 3em;  
+  height: 4em;  
 }
 
-#parks  li {
+#parks li {
   background: white;
   display: block;
   float: left;
-  padding: 0.8rem;
+  /* padding: 0.8rem; */
+  padding-top: 1.25em;
   position: relative;
   text-decoration: none;
   transition-duration: 0.5s;
@@ -69,17 +70,16 @@ li:hover > a, .activeResort > a {
 }
 
 ul li ul {
-  /* visibility: hidden; */
+  visibility: hidden;
   opacity: 0;
   position: absolute;
   transition: all 0.5s ease;
-  margin-top: 5.3em;
+  margin-top: 5em;
   left: 0;
   display: none;
 }
 
-ul li:hover > ul,
-ul li ul:hover {
+#parks > li:hover  ul {
 visibility: visible;
 opacity: 1;
 display: block;
@@ -102,12 +102,40 @@ padding-left: 0;
 }
 
 #parks > li > ul {
-  margin-top: 0.7em;
+  margin-top: 1.4em;
 }
 
 .activeResort {
   background-color:  #33BBFF !important;
 }
+
+#logo {
+  padding-top: 0 !important;
+  width: 4em;
+  height: 4em;
+}
+
+#logo:hover {
+  background-color: white !important;
+  cursor: default !important;
+}
+
+#logoContainer {
+  height: 3em;
+  width: 100%;
+}
+
+#logoImage {
+  height: 140%;
+  width: 50%;
+  display: block;
+  margin: auto;
+}
+
+#logoImage:hover {
+  cursor: pointer;
+}
+
 
                                  /* sidebarSection */
 #sidebar {
@@ -115,8 +143,10 @@ padding-left: 0;
   flex-direction: column;
   z-index: 100;
   position: fixed;
-  margin-top: 35vh;
-  right: 1.5em;
+  /* margin-top: 35vh; */
+  margin-top: 30vh;
+  /* right: 1.5em; */
+  right: 2.65em;
   /* background-image: url("images/sidebarbackgroundimage.jpg"); */
   background-color:rgba(255, 255, 255, 0.7);
   background-repeat: no-repeat;
@@ -192,7 +222,8 @@ padding-left: 0;
   overflow: hidden; 
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 80vh;
+  /* margin-top: 4.5em; */
  }
 
 #slider figure img { 
@@ -213,7 +244,7 @@ padding-left: 0;
 
 #indicatorContainer {
   position: absolute;
-  top: 90vh;
+  top: 73vh;
   left: 43%;
 }
 
@@ -298,7 +329,7 @@ padding-left: 0;
 .rideImage {
   width: 100%;
   height: 100%;
-  transition: all 5s;
+  transition: all 7s;
 }
 
 .rideImage:focus, .rideImage:hover {
@@ -356,6 +387,13 @@ padding-left: 0;
                           /* landTimesSection */
 #landTimesSection {
   margin-top: 5em;
+  
+}
+
+#dateAndTimeSelection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
 }
 
 
@@ -381,8 +419,12 @@ select:hover {
   cursor: pointer;
 }
 
+#selectDate {
+  margin-right: 2em;
+}
+
 #selectTime {
-  margin-top: 3em;
+  margin-left: 2em;
 }
 
 #selectTime > select {
