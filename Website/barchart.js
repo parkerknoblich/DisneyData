@@ -147,9 +147,9 @@
     let time = timeSelector.options[timeSelector.selectedIndex].text;
     time = time.replace(" ", "");
     time = time.replace(":", "");
-    let url = "http://localhost:8000/landtimes/" + day + "/" + time;
+    let url = "http://localhost:8000/landtimes/" + day + "/" + time + "/" + activeParkID;
     fetch(url)
-      .then(response => response.text())
+      .then(response => response.json())
       .then(foo);
   }
 

@@ -29,26 +29,25 @@ const port = 8000;
 
 app.use(cors());
 
-app.get("/landtimes/:day/:time", async function(req, res) {
+app.get("/landtimes/:day/:time/:resortID", async function(req, res) {
     let day = req.params["day"];
     let time = req.params["time"];
-    // res.send(day + " " + time);
+    let resortID = req.params["resortID"];
     let result = [];
     try {
-        result = await getLandTimes(result, day, time);
+        result = await getLandTimes(day, time, resortID);
         res.json(result);
     } catch (error) {
         res.json("ERROR!");
     }
 });
 
-async function getLandTimes(result, day, time) {
-    let timeToGet = "time_" + time;
-    let foo = "ride_id";
-    let foo2 = "SELECT " + timeToGet;
-    let querySQL = foo2 + " FROM timepoints WHERE ride_id = 1 AND park_day = ?";
-    let [queryResult] = await database.query(querySQL, [day]);
-    return queryResult;
+async function getLandTimes(day, time, resortID) {
+    // let querySQL = "SELECT ride_id FROM rides WHERE resort_id = ? GROUP BY ride_land";
+    // let querySQL = "SELECT ride_id, GROUP_CONCAT(ride_land) FROM rides WHERE resort_id = ? GROUP BY ride_land";
+    let querySQL = "SELECT ride_land, GROUP_CONCAT(ride_id) FROM rides WHERE resort_id = ? GROUP BY ride_land";
+    let [queryResult] = await database.query(querySQL, [resortID]);
+    return queryResult[0]["GROUP_CONCAT(ride_id)"];
 }
 
 app.get("/disneylandparkanaheimwaittimes", (req, res) => {
