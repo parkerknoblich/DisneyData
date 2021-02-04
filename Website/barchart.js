@@ -156,7 +156,6 @@
 
   function foo(response) {
     console.log(response);
-    response.push(0);
     displayAverageWaitTimesByLand(response);
   }
 
@@ -259,6 +258,36 @@
     if (barChart != null) {
       barChart.destroy();
     }
+    let tempAverageLandTimes = averageLandTimes.sort();
+    let splitAverageLandTimesArray = splitAverageLandTimes(tempAverageLandTimes);
+    let highBackgroundColor = "rgb(255,0,0, 0.4)";
+    let highBorderColor = "#FF0000";
+    let mediumBackgroundColor = "rgb(255,255,0,0.4)";
+    let mediumBorderColor = "#FFFF00";
+    let lowBackgroundColor = "rgb(0,255,0,0.4)";
+    let lowBorderColor = "#32CD32";
+    let backgroundColors = [];
+    let borderColors = [];
+    for (let i = 0; i < splitAverageLandTimesArray.length; i++) {
+      let numOfWaitTimes = splitAverageLandTimesArray[i].length;
+      let selectedBackgroundColor;
+      let selectedBorderColor;
+      if (i == 0) {
+        selectedBackgroundColor = lowBackgroundColor;
+        selectedBorderColor = lowBorderColor;
+      } else if (i == 1) {
+        selectedBackgroundColor = mediumBackgroundColor;
+        selectedBorderColor = mediumBorderColor;
+      } else {
+        selectedBackgroundColor = highBackgroundColor;
+        selectedBorderColor = highBorderColor;
+      }
+      for (let j = 0; j < numOfWaitTimes; j++) {
+        backgroundColors.push(selectedBackgroundColor);
+        borderColors.push(selectedBorderColor);
+      }
+    }
+    averageLandTimes.push(0);
     let CHART = document.getElementById("barChart");
     let newBarChart = new Chart(CHART, {
        type: 'bar',
@@ -267,11 +296,12 @@
            datasets: [
                {
                    label: "Predicted Average Wait Time (mins)",
-                  //  data: [30, 20, 55, 30, 25, 15, 35, 40, 5, 0],
                    data: averageLandTimes,
                    borderWidth: 2,
-                   borderColor: ["#ff0000", "#FFFF00", "#32CD32", "#32CD32", "#32CD32", "#32CD32", "#32CD32", "#32CD32", "#32CD32"],
-                   backgroundColor: ["rgb(255,0,0, 0.4)", "rgb(255,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)"]
+                   borderColor: borderColors,
+                   backgroundColor: backgroundColors
+                  //  borderColor: ["#ff0000", "#FFFF00", "#32CD32", "#32CD32", "#32CD32", "#32CD32", "#32CD32", "#32CD32", "#32CD32"],
+                  //  backgroundColor: ["rgb(255,0,0, 0.4)", "rgb(255,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)"]
                },
            ]
        },
@@ -307,6 +337,19 @@
        }
    });
    barChart = newBarChart;
+  }
+
+  function splitAverageLandTimes(tempAverageLandTimes) {
+    let n = 3;
+    let result = [[], [], []];
+    let numsPerArray = Math.ceil(tempAverageLandTimes.length / 3);
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < numsPerArray; j++) {
+        let value = tempAverageLandTimes[i + i * numsPerArray];
+        result[i].push(value);
+      }
+    }
+    return result;
   }
 
 }) ();
