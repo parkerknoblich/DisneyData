@@ -401,9 +401,9 @@ padding-left: 0;
   background-color: #33BBFF;
   color: white;
   padding: 12px;
-  width: 250px;
+  width: 300px;
   border: none;
-  font-size: 0.9em;
+  font-size: 1em;
   font-weight: bolder;
   /* box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); */
   -webkit-appearance: button;
@@ -428,7 +428,7 @@ select:hover {
 }
 
 #selectTime > select {
-  width: 7em;
+  width: 10em;
 }
 
                             /* weatherSection */

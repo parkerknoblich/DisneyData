@@ -3,6 +3,7 @@
   let activeParkID = 1;
   let ridesToRemove;
   let currentLands;
+  let barChart = null;
   const disneylandParkAnaheimLands = ["Adventureland", "Critter Country", "Fantasyland", "Frontierland", "Main Street U.S.A.", 
   "Mickey's Toontown", "New Orleans Square", "Star Wars: Galaxy's Edge", "Tomorrowland"];
   const disneyCaliforniaAdventureParkLands = ["Cars Land", "Grizzly Peak", "Hollywood Land", "Pacific Wharf", "Paradise Gardens Park",
@@ -129,7 +130,7 @@
       currentLands = tokyoDisneySeaLands;
       ridesToRemove = tokyoDisneySeaRidesToRemove;
     }
-    displayAverageWaitTimes();
+    // displayAverageWaitTimesByLand();
     let dateSelector = document.querySelector("#selectDate select");
     dateSelector.addEventListener("change", function() {
       getLandWaitTimes();
@@ -155,6 +156,8 @@
 
   function foo(response) {
     console.log(response);
+    response.push(0);
+    displayAverageWaitTimesByLand(response);
   }
 
 
@@ -252,16 +255,20 @@
   }
 
 
-  function displayAverageWaitTimes() {
-   const CHART = document.getElementById("barChart");
-   let barChart = new Chart(CHART, {
+  function displayAverageWaitTimesByLand(averageLandTimes) {
+    if (barChart != null) {
+      barChart.destroy();
+    }
+    let CHART = document.getElementById("barChart");
+    let newBarChart = new Chart(CHART, {
        type: 'bar',
        data: {
            labels: currentLands,
            datasets: [
                {
                    label: "Predicted Average Wait Time (mins)",
-                   data: [30, 20, 55, 30, 25, 15, 35, 40, 5, 0],
+                  //  data: [30, 20, 55, 30, 25, 15, 35, 40, 5, 0],
+                   data: averageLandTimes,
                    borderWidth: 2,
                    borderColor: ["#ff0000", "#FFFF00", "#32CD32", "#32CD32", "#32CD32", "#32CD32", "#32CD32", "#32CD32", "#32CD32"],
                    backgroundColor: ["rgb(255,0,0, 0.4)", "rgb(255,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)"]
@@ -299,48 +306,7 @@
          }
        }
    });
+   barChart = newBarChart;
   }
 
 }) ();
-
-
-
-// activeParkID = 20;
-//         switch(activeParkID) {
-//           case 1:
-//             currentLands = disneylandParkAnaheimLands;
-//             break;
-//           case 2:
-//             currentLands = disneyCaliforniaAdventureParkLands;
-//             break;
-//           case 4:
-//             currentLands = animalKingdomLands;
-//             break;
-//           case 5:
-//             currentLands = epcotLands;
-//             break;
-//           case 6:
-//             currentLands = hollywoodStudiosLands;
-//             break;
-//           case 7:
-//             currentLands = magicKingdomLands;
-//             break;
-//           case 9:
-//             currentLands = disneylandParkParisLands;
-//             break;
-//           case 10:
-//             currentLands = waltDisneyStudiosPark;
-//             break;
-//           case 12:
-//             currentLands = disneylandParkHongKongLands;
-//             break;
-//           case 14:
-//             currentLands = shanghaiDisneylandLands;
-//             break;
-//           case 16:
-//             currentLands = tokyoDisneylandLands;
-//             break;
-//           case 17:
-//             currentLands = tokyoDisneySeaLands;
-//             break;
-//         }
