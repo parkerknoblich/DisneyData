@@ -45,9 +45,34 @@ app.get("/landtimes/:day/:time/:resortID", async function(req, res) {
 async function getLandTimes(day, time, resortID) {
     // let querySQL = "SELECT ride_id FROM rides WHERE resort_id = ? GROUP BY ride_land";
     // let querySQL = "SELECT ride_id, GROUP_CONCAT(ride_land) FROM rides WHERE resort_id = ? GROUP BY ride_land";
-    let querySQL = "SELECT ride_land, GROUP_CONCAT(ride_id) FROM rides WHERE resort_id = ? GROUP BY ride_land";
-    let [queryResult] = await database.query(querySQL, [resortID]);
-    return queryResult[0]["GROUP_CONCAT(ride_id)"];
+    let ridesSQL = "SELECT ride_land, GROUP_CONCAT(ride_id) FROM rides WHERE resort_id = ? GROUP BY ride_land";
+    let [ridesQueryResult] = await database.query(ridesSQL, [resortID]);
+    let rideIDsByLand = [];
+    for (let i = 0; i < ridesQueryResult.length; i++) {
+        rideIDsByLand.push(ridesQueryResult[i]["GROUP_CONCAT(ride_id)"].split(","));
+    }
+    // one ride
+    // let timeQueryAttribute = "time_" + time;
+    // let countQueryAttribute = "count_" + time;
+    // let timesSQL = "SELECT " + timeQueryAttribute + ", " + countQueryAttribute + " FROM timepoints WHERE ride_id = ? AND park_day = ?";
+    // let [timesSQLResult] = await database.query(timesSQL, [parseInt(rideIDsByLand[0][0]), day]);
+    // let averageTime = timesSQLResult[0][timeQueryAttribute] / timesSQLResult[0][countQueryAttribute];
+    // return averageTime;
+    let timeQueryAttribute = "time_" + time;
+    let countQueryAttribute = "count_" + time;
+    let timesSQL = "SELECT " + timeQueryAttribute + ", " + countQueryAttribute + " FROM timepoints WHERE ride_id = ? AND park_day = ?";
+    let rideTimesByLand = [];
+    for (let i = 0; i < rideIDsByLand.length; i++) {
+        let averageLandTime = 0;
+        let rideCount = rideIDsByLand[i].length;
+        for (let j = 0; j < rideCount; j++) {
+            let [timesSQLResult] = await database.query(timesSQL, [parseInt(rideIDsByLand[i][j]), day]);
+            let averageRideTime = timesSQLResult[0][timeQueryAttribute] / timesSQLResult[0][countQueryAttribute];
+            averageLandTime += averageRideTime;
+        }
+        rideTimesByLand.push(averageLandTime / rideCount);
+    }
+    return rideTimesByLand;
 }
 
 app.get("/disneylandparkanaheimwaittimes", (req, res) => {
