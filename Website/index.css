@@ -384,6 +384,12 @@ padding-left: 0;
   bottom: 0%;
 }
 
+.timesParent {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1.5em;
+}
+
                           /* landTimesSection */
 #landTimesSection {
   margin-top: 5em;

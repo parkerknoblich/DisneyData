@@ -1,7 +1,7 @@
-function animateProgressBar(num, color, rideNumber) {
+function animateTimeCircle(num, color, rideNumber) {
     // var value = 150;
-    let allProgress = document.getElementsByClassName("progress");
-    $(allProgress[rideNumber]).circliful({
+    let allCurrentTimes = document.getElementsByClassName("currentTime");
+    $(allCurrentTimes[rideNumber]).circliful({
         animationStep: 2,
         fontColor: "#fff",
         foregroundBorderWidth: 15,

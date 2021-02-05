@@ -2,6 +2,7 @@ const express = require("express");
 const ThemeParks = require("themeparks");
 const cors = require("cors");
 const mysql = require("mysql2/promise");
+const { response } = require("express");
 
 const database = mysql.createPool({
     host: "localhost",
@@ -38,7 +39,7 @@ app.get("/landtimes/:day/:time/:resortID", async function(req, res) {
         result = await getLandTimes(day, time, resortID);
         res.json(result);
     } catch (error) {
-        res.json("ERROR!");
+        res.send(error);
     }
 });
 
@@ -49,13 +50,6 @@ async function getLandTimes(day, time, resortID) {
     for (let i = 0; i < ridesQueryResult.length; i++) {
         rideIDsByLand.push(ridesQueryResult[i]["GROUP_CONCAT(ride_id)"].split(","));
     }
-    // one ride
-    // let timeQueryAttribute = "time_" + time;
-    // let countQueryAttribute = "count_" + time;
-    // let timesSQL = "SELECT " + timeQueryAttribute + ", " + countQueryAttribute + " FROM timepoints WHERE ride_id = ? AND park_day = ?";
-    // let [timesSQLResult] = await database.query(timesSQL, [parseInt(rideIDsByLand[0][0]), day]);
-    // let averageTime = timesSQLResult[0][timeQueryAttribute] / timesSQLResult[0][countQueryAttribute];
-    // return averageTime;
     let timeQueryAttribute = "time_" + time;
     let countQueryAttribute = "count_" + time;
     let timesSQL = "SELECT " + timeQueryAttribute + ", " + countQueryAttribute + " FROM timepoints WHERE ride_id = ? AND park_day = ?";
@@ -71,6 +65,35 @@ async function getLandTimes(day, time, resortID) {
         rideTimesByLand.push(Math.round(averageLandTime / rideCount));
     }
     return rideTimesByLand;
+}
+
+app.get("/individualtime/:ridename/:resortID/:day", async function(req, res) {
+    let rideName = req.params["ridename"];
+    let resortID = req.params["resortID"];
+    let day = req.params["day"];
+    let result = [];
+    try {
+        result = await getIndividualTime(rideName, resortID, day);
+        res.json(result);
+    } catch (error) {
+        res.send(error);
+    }
+});
+
+async function getIndividualTime(rideName, resortID, day) {
+    let rideSQLQuery = "SELECT ride_id FROM rides WHERE ride_name = ? AND resort_id = ?";
+    let [rideSQLQueryResult] = await database.query(rideSQLQuery, [rideName, resortID]);
+    let rideID = rideSQLQueryResult[0]["ride_id"];
+    let timeSQLQuery = "SELECT time_900am / count_900am, time_1200pm / count_1200pm, time_300pm / count_300pm, time_600pm / count_600pm, time_900pm / count_900pm, time_1200am / count_1200am FROM timepoints WHERE ride_id = ? AND park_day = ?";
+    let [timeSQL] = await database.query(timeSQLQuery, [rideID, day]);
+    let predictedTimes = [];
+    predictedTimes.push(parseInt(timeSQL[0]["time_900am / count_900am"]));
+    predictedTimes.push(parseInt(timeSQL[0]["time_1200pm / count_1200pm"]));
+    predictedTimes.push(parseInt(timeSQL[0]["time_300pm / count_300pm"]));
+    predictedTimes.push(parseInt(timeSQL[0]["time_600pm / count_600pm"]));
+    predictedTimes.push(parseInt(timeSQL[0]["time_900pm / count_900pm"]));
+    predictedTimes.push(parseInt(timeSQL[0]["time_1200am / count_1200am "]));
+    return predictedTimes;
 }
 
 app.get("/disneylandparkanaheimwaittimes", (req, res) => {

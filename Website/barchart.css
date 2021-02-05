@@ -10,3 +10,13 @@
   height: 100%;
   width: 100%;
 }
+
+.lineChartParent {
+  height: 250px;
+  width: 600px;
+}
+
+.predictedTime {
+  height: 100%;
+  width: 100%;
+}

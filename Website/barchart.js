@@ -4,6 +4,8 @@
   let ridesToRemove;
   let currentLands;
   let barChart = null;
+  let lineChart = null;
+  let selectedRideNumber;
   const disneylandParkAnaheimLands = ["Adventureland", "Critter Country", "Fantasyland", "Frontierland", "Main Street U.S.A.", 
   "Mickey's Toontown", "New Orleans Square", "Star Wars: Galaxy's Edge", "Tomorrowland"];
   const disneyCaliforniaAdventureParkLands = ["Cars Land", "Grizzly Peak", "Hollywood Land", "Pacific Wharf", "Paradise Gardens Park",
@@ -140,8 +142,6 @@
     });
   }
 
-
-
   function getRideWaitTimes() {
     let url;
     switch (activeParkID) {
@@ -190,7 +190,7 @@
         .then(function(response) {
           return filterRides(response);
         })
-        .then(displayAllRideWaitTimes);
+        .then(getAllIndividualWaitTimes);
   }
 
   function sortRides(key) {
@@ -206,23 +206,26 @@
             filteredArray.push(responseData[i]);
         }
       }
-      console.log(filteredArray);
+      // console.log(filteredArray);
       return filteredArray;
   }
 
-  function displayAllRideWaitTimes(responseData) {
+  function getAllIndividualWaitTimes(responseData) {
     for (let i = 0; i < responseData.length; i++) {
         console.log(responseData[i].name + " " + responseData[i].waitTime);
     }
     let allRidesImages = document.getElementsByClassName("rideImage");
+    let allRideNames = document.getElementsByClassName("rideName");
     for (let i = 0; i < allRidesImages.length; i++) {
         allRidesImages[i].addEventListener("click", function() {
-            setTimeout(displayIndividualRideWaitTime, 350, responseData[i].waitTime, i);
+            selectedRideNumber = i;
+            setTimeout(displayCurrentIndividualRideWaitTime, 350, responseData[i].waitTime);
+            getIndividualPredictedWaitTime(allRideNames[i].innerHTML);
         }, {once : true});
     }
   }
 
-  function displayIndividualRideWaitTime(num, rideNumber) {
+  function displayCurrentIndividualRideWaitTime(num) {
     let color;
     if (num <= 30) {
         color = "#39ff14"
@@ -231,8 +234,78 @@
     } else {
         color = "#FF0000";
     }
-    animateProgressBar(num, color, rideNumber);
+    animateTimeCircle(num, color, selectedRideNumber);
   }
+
+  function getIndividualPredictedWaitTime(rideName) {
+    let dateSelector = document.querySelector("#selectDate select");
+    let day = dateSelector.options[dateSelector.selectedIndex].text.split(" ")[0];
+    let url = "http://localhost:8000/individualtime/" + rideName + "/" + activeParkID + "/" + day;
+    fetch(url)
+      .then(response => response.json())
+      .then(displayPredictedIndividualWaitTime);
+  }
+
+  
+  function displayPredictedIndividualWaitTime(predictedRideWaitTimes) {
+    console.log(predictedRideWaitTimes);
+    // if (lineChart != null) {
+    //   lineChart.destroy();
+    // }
+    let allRideLineCharts = document.getElementsByClassName("predictedTime");
+    let CHART = allRideLineCharts[selectedRideNumber];
+    let newLineChart = new Chart(CHART, {
+       type: 'line',
+       data: {
+           labels: ["9:00am", "12:00pm", "3:00pm", "6:00pm", "9:00pm", "12:00am"],
+           datasets: [
+               {
+                   label: "Today's Predicted Wait Time (mins)",
+                   data: predictedRideWaitTimes,
+                   borderWidth: 2,
+                   borderColor: "#33BBFF",
+                  //  backgroundColor: "#33BBFF"
+               },
+           ]
+       },
+       options: {
+         legend: {
+           labels: {
+             fontColor: "white",
+             fontSize: 15
+           }
+         },
+         scales: {
+           yAxes: [{
+             ticks: {
+               fontColor: "white",
+               fontSize: 15
+             },
+             gridLines: {
+              zeroLineColor: "white",
+              //  color: " #33BBFF",
+               lineWidth: 1
+             }
+           }],
+           xAxes: [{
+             ticks: {
+               fontColor: "white",
+               fontSize: 15
+             },
+             gridLines: {
+               
+               color: "white",
+               display: false
+             }
+           }]
+         }
+       }
+   });
+   lineChart = newLineChart; 
+  }
+
+
+
 
   function getLandWaitTimes() {
     let dateSelector = document.querySelector("#selectDate select");
@@ -244,15 +317,8 @@
     let url = "http://localhost:8000/landtimes/" + day + "/" + time + "/" + activeParkID;
     fetch(url)
       .then(response => response.json())
-      .then(foo);
+      .then(displayAverageWaitTimesByLand);
   }
-
-  function foo(response) {
-    console.log("By land:");
-    console.log(response);
-    displayAverageWaitTimesByLand(response);
-  }
-
 
   function displayAverageWaitTimesByLand(averageLandTimes) {
     if (barChart != null) {
@@ -274,8 +340,6 @@
     let lowBorderColor = "#32CD32";
     let backgroundColors = [];
     let borderColors = [];
-
-
     for (let i = 0; i < averageLandTimes.length; i++) {
       if (splitAverageLandTimesArray[0].includes(averageLandTimes[i])) {
         backgroundColors.push(lowBackgroundColor);
@@ -288,28 +352,6 @@
         borderColors.push(highBorderColor);
       }
     }
-
-
-
-    // for (let i = 0; i < splitAverageLandTimesArray.length; i++) {
-    //   let numOfWaitTimes = splitAverageLandTimesArray[i].length;
-    //   let selectedBackgroundColor;
-    //   let selectedBorderColor;
-    //   if (i == 0) {
-    //     selectedBackgroundColor = lowBackgroundColor;
-    //     selectedBorderColor = lowBorderColor;
-    //   } else if (i == 1) {
-    //     selectedBackgroundColor = mediumBackgroundColor;
-    //     selectedBorderColor = mediumBorderColor;
-    //   } else {
-    //     selectedBackgroundColor = highBackgroundColor;
-    //     selectedBorderColor = highBorderColor;
-    //   }
-    //   for (let j = 0; j < numOfWaitTimes; j++) {
-    //     backgroundColors.push(selectedBackgroundColor);
-    //     borderColors.push(selectedBorderColor);
-    //   }
-    // }
     averageLandTimes.push(0);
     let CHART = document.getElementById("barChart");
     let newBarChart = new Chart(CHART, {
@@ -323,8 +365,6 @@
                    borderWidth: 2,
                    borderColor: borderColors,
                    backgroundColor: backgroundColors
-                  //  borderColor: ["#ff0000", "#FFFF00", "#32CD32", "#32CD32", "#32CD32", "#32CD32", "#32CD32", "#32CD32", "#32CD32"],
-                  //  backgroundColor: ["rgb(255,0,0, 0.4)", "rgb(255,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)", "rgb(0,255,0,0.4)"]
                },
            ]
        },
