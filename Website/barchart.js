@@ -130,7 +130,6 @@
       currentLands = tokyoDisneySeaLands;
       ridesToRemove = tokyoDisneySeaRidesToRemove;
     }
-    // displayAverageWaitTimesByLand();
     let dateSelector = document.querySelector("#selectDate select");
     dateSelector.addEventListener("change", function() {
       getLandWaitTimes();
@@ -139,24 +138,6 @@
     timeSelector.addEventListener("change", function() {
       getLandWaitTimes();
     });
-  }
-
-  function getLandWaitTimes() {
-    let dateSelector = document.querySelector("#selectDate select");
-    let day = dateSelector.options[dateSelector.selectedIndex].text.split(" ")[0];
-    let timeSelector = document.querySelector("#selectTime select");
-    let time = timeSelector.options[timeSelector.selectedIndex].text;
-    time = time.replace(" ", "");
-    time = time.replace(":", "");
-    let url = "http://localhost:8000/landtimes/" + day + "/" + time + "/" + activeParkID;
-    fetch(url)
-      .then(response => response.json())
-      .then(foo);
-  }
-
-  function foo(response) {
-    console.log(response);
-    displayAverageWaitTimesByLand(response);
   }
 
 
@@ -253,13 +234,38 @@
     animateProgressBar(num, color, rideNumber);
   }
 
+  function getLandWaitTimes() {
+    let dateSelector = document.querySelector("#selectDate select");
+    let day = dateSelector.options[dateSelector.selectedIndex].text.split(" ")[0];
+    let timeSelector = document.querySelector("#selectTime select");
+    let time = timeSelector.options[timeSelector.selectedIndex].text;
+    time = time.replace(" ", "");
+    time = time.replace(":", "");
+    let url = "http://localhost:8000/landtimes/" + day + "/" + time + "/" + activeParkID;
+    fetch(url)
+      .then(response => response.json())
+      .then(foo);
+  }
+
+  function foo(response) {
+    console.log("By land:");
+    console.log(response);
+    displayAverageWaitTimesByLand(response);
+  }
+
 
   function displayAverageWaitTimesByLand(averageLandTimes) {
     if (barChart != null) {
       barChart.destroy();
     }
-    let tempAverageLandTimes = averageLandTimes.sort();
-    let splitAverageLandTimesArray = splitAverageLandTimes(tempAverageLandTimes);
+    let tempAverageLandTimes = [];
+    let newTempAverageLandTimes = tempAverageLandTimes.concat(averageLandTimes);
+    newTempAverageLandTimes.sort(function(a, b) {
+      return a - b;
+    });
+    console.log("Sorted:");
+    console.log(newTempAverageLandTimes);
+    let splitAverageLandTimesArray = splitAverageLandTimes(newTempAverageLandTimes);
     let highBackgroundColor = "rgb(255,0,0, 0.4)";
     let highBorderColor = "#FF0000";
     let mediumBackgroundColor = "rgb(255,255,0,0.4)";
@@ -268,25 +274,42 @@
     let lowBorderColor = "#32CD32";
     let backgroundColors = [];
     let borderColors = [];
-    for (let i = 0; i < splitAverageLandTimesArray.length; i++) {
-      let numOfWaitTimes = splitAverageLandTimesArray[i].length;
-      let selectedBackgroundColor;
-      let selectedBorderColor;
-      if (i == 0) {
-        selectedBackgroundColor = lowBackgroundColor;
-        selectedBorderColor = lowBorderColor;
-      } else if (i == 1) {
-        selectedBackgroundColor = mediumBackgroundColor;
-        selectedBorderColor = mediumBorderColor;
+
+
+    for (let i = 0; i < averageLandTimes.length; i++) {
+      if (splitAverageLandTimesArray[0].includes(averageLandTimes[i])) {
+        backgroundColors.push(lowBackgroundColor);
+        borderColors.push(lowBorderColor);
+      } else if (splitAverageLandTimesArray[1].includes(averageLandTimes[i])) {
+        backgroundColors.push(mediumBackgroundColor);
+        borderColors.push(mediumBorderColor);
       } else {
-        selectedBackgroundColor = highBackgroundColor;
-        selectedBorderColor = highBorderColor;
-      }
-      for (let j = 0; j < numOfWaitTimes; j++) {
-        backgroundColors.push(selectedBackgroundColor);
-        borderColors.push(selectedBorderColor);
+        backgroundColors.push(highBackgroundColor);
+        borderColors.push(highBorderColor);
       }
     }
+
+
+
+    // for (let i = 0; i < splitAverageLandTimesArray.length; i++) {
+    //   let numOfWaitTimes = splitAverageLandTimesArray[i].length;
+    //   let selectedBackgroundColor;
+    //   let selectedBorderColor;
+    //   if (i == 0) {
+    //     selectedBackgroundColor = lowBackgroundColor;
+    //     selectedBorderColor = lowBorderColor;
+    //   } else if (i == 1) {
+    //     selectedBackgroundColor = mediumBackgroundColor;
+    //     selectedBorderColor = mediumBorderColor;
+    //   } else {
+    //     selectedBackgroundColor = highBackgroundColor;
+    //     selectedBorderColor = highBorderColor;
+    //   }
+    //   for (let j = 0; j < numOfWaitTimes; j++) {
+    //     backgroundColors.push(selectedBackgroundColor);
+    //     borderColors.push(selectedBorderColor);
+    //   }
+    // }
     averageLandTimes.push(0);
     let CHART = document.getElementById("barChart");
     let newBarChart = new Chart(CHART, {
@@ -339,16 +362,17 @@
    barChart = newBarChart;
   }
 
-  function splitAverageLandTimes(tempAverageLandTimes) {
+  function splitAverageLandTimes(newTempAverageLandTimes) {
     let n = 3;
     let result = [[], [], []];
-    let numsPerArray = Math.ceil(tempAverageLandTimes.length / 3);
+    let numsPerArray = Math.ceil(newTempAverageLandTimes.length / 3);
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < numsPerArray; j++) {
-        let value = tempAverageLandTimes[i + i * numsPerArray];
+        let value = newTempAverageLandTimes[j + i * numsPerArray];
         result[i].push(value);
       }
     }
+    console.log(result);
     return result;
   }
 

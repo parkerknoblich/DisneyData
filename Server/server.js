@@ -43,8 +43,6 @@ app.get("/landtimes/:day/:time/:resortID", async function(req, res) {
 });
 
 async function getLandTimes(day, time, resortID) {
-    // let querySQL = "SELECT ride_id FROM rides WHERE resort_id = ? GROUP BY ride_land";
-    // let querySQL = "SELECT ride_id, GROUP_CONCAT(ride_land) FROM rides WHERE resort_id = ? GROUP BY ride_land";
     let ridesSQL = "SELECT ride_land, GROUP_CONCAT(ride_id) FROM rides WHERE resort_id = ? GROUP BY ride_land";
     let [ridesQueryResult] = await database.query(ridesSQL, [resortID]);
     let rideIDsByLand = [];
@@ -67,10 +65,10 @@ async function getLandTimes(day, time, resortID) {
         let rideCount = rideIDsByLand[i].length;
         for (let j = 0; j < rideCount; j++) {
             let [timesSQLResult] = await database.query(timesSQL, [parseInt(rideIDsByLand[i][j]), day]);
-            let averageRideTime = timesSQLResult[0][timeQueryAttribute] / timesSQLResult[0][countQueryAttribute];
+            let averageRideTime = Math.round(timesSQLResult[0][timeQueryAttribute] / timesSQLResult[0][countQueryAttribute]);
             averageLandTime += averageRideTime;
         }
-        rideTimesByLand.push(averageLandTime / rideCount);
+        rideTimesByLand.push(Math.round(averageLandTime / rideCount));
     }
     return rideTimesByLand;
 }
