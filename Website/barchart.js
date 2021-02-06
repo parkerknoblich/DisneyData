@@ -226,15 +226,20 @@
   }
 
   function displayCurrentIndividualRideWaitTime(num) {
-    let color;
-    if (num <= 30) {
-        color = "#39ff14"
-    } else if (num > 30 && num <= 60) {
-        color = "#FFFF00";
-    } else {
-        color = "#FF0000";
+    let trailColor;
+    let backgroundColor= "#D3D3D3";
+    if (num == 0) {
+      backgroundColor = "#FF0000";
     }
-    animateTimeCircle(num, color, selectedRideNumber);
+    if (num <= 30) {
+        trailColor = "#39ff14";
+
+    } else if (num > 30 && num <= 60) {
+        trailColor = "#FFFF00";
+    } else {
+        trailColor = "#FF0000";
+    }
+    animateTimeCircle(num, trailColor, backgroundColor, selectedRideNumber);
   }
 
   function getIndividualPredictedWaitTime(rideName) {
@@ -248,10 +253,6 @@
 
   
   function displayPredictedIndividualWaitTime(predictedRideWaitTimes) {
-    console.log(predictedRideWaitTimes);
-    // if (lineChart != null) {
-    //   lineChart.destroy();
-    // }
     let allRideLineCharts = document.getElementsByClassName("predictedTime");
     let CHART = allRideLineCharts[selectedRideNumber];
     let newLineChart = new Chart(CHART, {
@@ -281,8 +282,7 @@
                fontSize: 15
              },
              gridLines: {
-               zeroLineColor: "white",
-               lineWidth: 1
+               lineWidth: 0
              }
            }],
            xAxes: [{
