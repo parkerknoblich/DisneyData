@@ -132,6 +132,7 @@
       currentLands = tokyoDisneySeaLands;
       ridesToRemove = tokyoDisneySeaRidesToRemove;
     }
+    getLandWaitTimes();
     let dateSelector = document.querySelector("#selectDate select");
     dateSelector.addEventListener("change", function() {
       getLandWaitTimes();
@@ -206,7 +207,6 @@
             filteredArray.push(responseData[i]);
         }
       }
-      // console.log(filteredArray);
       return filteredArray;
   }
 
@@ -301,9 +301,6 @@
    });
    lineChart = newLineChart; 
   }
-
-
-
 
   function getLandWaitTimes() {
     let dateSelector = document.querySelector("#selectDate select");
