@@ -93,19 +93,26 @@
     }
 
     function filterRides() {
-        let input, filter, ul, li, txtValue;
+        let input, filter, ul, li, txtValue, rideNames
         input = document.getElementById("rideSearch");
         filter = input.value.toUpperCase();
         ul = document.getElementById("rides");
         li = ul.getElementsByTagName("li");
+        rideNames = document.getElementsByClassName("rideName");
         for (let i = 0; i < li.length; i++) {
             txtValue = li[i].innerHTML;
+            txtValue = rideNames[i].innerHTML;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 li[i].style.display = "";
             } else {
                 li[i].style.display = "none";
             }
         }
+        input.addEventListener("search", function(){
+            for (let i = 0; i < li.length; i++) {
+                li[i].style.display = "block";
+            }
+        })
     }
 
     function displayDates() {
