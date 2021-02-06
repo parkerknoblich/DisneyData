@@ -220,7 +220,7 @@
         allRidesImages[i].addEventListener("click", function() {
             selectedRideNumber = i;
             setTimeout(displayCurrentIndividualRideWaitTime, 350, responseData[i].waitTime);
-            getIndividualPredictedWaitTime(allRideNames[i].innerHTML);
+            getIndividualPredictedWaitTime(allRideNames[i].innerHTML.replace("&amp;", "&"));
         }, {once : true});
     }
   }
@@ -264,7 +264,6 @@
                    data: predictedRideWaitTimes,
                    borderWidth: 2,
                    borderColor: "#33BBFF",
-                  //  backgroundColor: "#33BBFF"
                },
            ]
        },
@@ -282,8 +281,7 @@
                fontSize: 15
              },
              gridLines: {
-              zeroLineColor: "white",
-              //  color: " #33BBFF",
+               zeroLineColor: "white",
                lineWidth: 1
              }
            }],

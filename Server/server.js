@@ -82,7 +82,12 @@ app.get("/individualtime/:ridename/:resortID/:day", async function(req, res) {
 
 async function getIndividualTime(rideName, resortID, day) {
     let rideSQLQuery = "SELECT ride_id FROM rides WHERE ride_name = ? AND resort_id = ?";
-    let [rideSQLQueryResult] = await database.query(rideSQLQuery, [rideName, resortID]);
+    // if (rideName.includes("&")) {
+    //     // rideName = rideName.replace("&", "\\&");
+    //     console.log(decodeURI(rideName));
+    //     // rideName = "Mickey \& Minnie's Runaway Railway";
+    // }
+    let [rideSQLQueryResult] = await database.query(rideSQLQuery, [decodeURI(rideName), resortID]);
     let rideID = rideSQLQueryResult[0]["ride_id"];
     let timeSQLQuery = "SELECT time_900am / count_900am, time_1200pm / count_1200pm, time_300pm / count_300pm, time_600pm / count_600pm, time_900pm / count_900pm, time_1200am / count_1200am FROM timepoints WHERE ride_id = ? AND park_day = ?";
     let [timeSQL] = await database.query(timeSQLQuery, [rideID, day]);
