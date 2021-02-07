@@ -2,6 +2,7 @@ const express = require("express");
 const ThemeParks = require("themeparks");
 const cors = require("cors");
 const mysql = require("mysql2/promise");
+const CronJob = require("cron").CronJob;
 const { response } = require("express");
 
 
@@ -26,9 +27,9 @@ const disneylandParkAnaheimRidesToRemove = ["Encounter the Dark Side at Star War
   "Spice Road Table", "The American Adventure"];
   const hollywoodStudiosRidesToRemove = ["50's Prime Time Café", "BB-8 Astromech on Duty", "Beauty and the Beast-Live on Stage",
   "Celebrity Spotlight", "Disney Junior Dance Party!", "Disney Junior Play and Dance!", "Disney Society Orchestra and Friends",
-  "For the First Time in Forever: A Frozen Sing-Along Celebration", "Hollywood & Vine", "Indiana Jones™ Epic Stunt Spectacular!",
+  "For the First Time in Forever: A Frozen Sing-Along Celebration", "Hollywood & Vine", "Indiana Jones Epic Stunt Spectacular!",
   "Lightning McQueen's Racing Academy", "Mama Melrose's Ristorante Italiano", "Meet Sulley at Walt Disney Presents",
-  "Mickey and Minnie Starring in Red Carpet Dreams", "Muppet*Vision 3D", "Oga's Cantina at the Walt Disney World Resort",
+  "Mickey and Minnie Starring in Red Carpet Dreams", "MuppetVision 3D", "Oga's Cantina at the Walt Disney World Resort",
   "Sci-Fi Dine-In Theater Restaurant", "Star Wars: Galaxy's Edge", "Star Wars Launch Bay: Encounter Darth Vader",
   "Star Wars Launch Bay: Meet Chewbacca", "Star Wars Launch Bay Theater", "The Hollywood Brown Derby", "Vacation Fun - An Original Animated Short with Mickey & Minnie",
   "Voyage of The Little Mermaid", "Walt Disney Presents"];
@@ -45,12 +46,12 @@ const disneylandParkAnaheimRidesToRemove = ["Encounter the Dark Side at Star War
   "Pirate Galleon", "Pirates' Beach", "Princess Pavilion", "Rustler Roundup Shootin' Gallery", "Sleeping Beauty Castle",
   "Welcome to Starport: A Star Wars Encounter"];
   const waltDisneyStudiosParkRidesToRemove = ["Animation Celebration – Frozen : A Musical Invitation", "Armageddon : les Effets Spéciaux",
-  "Art of Disney Animation®", "Disney Studio 1", "Rock 'n' Roller Coaster starring Aerosmith", "Studio Tram Tour®: Behind the Magic",
+  "Art of Disney Animation", "Disney Studio 1", "Rock 'n' Roller Coaster starring Aerosmith", "Studio Tram Tour: Behind the Magic",
   "Top secret - Under construction: The Avengers new headquarters"];
   const disneylandParkHongKongRidesToRemove = ["Animation Academy", "Building a Dream: The Magic Behind a Disney Castle",
   "Clopin's Festival of Foods", "Comet Cafe", "Fairy Tale Forest - presented by PANDORA", "Fantasy Gardens",
   "Hong Kong Disneyland Railroad – Fantasyland Station", "Iron Man Tech Showcase - Presented by Stark Industries",
-  "Main Street Vehicles", "River View Cafe", "STAR WARS™: Command Post", "Tahitian Terrace",
+  "Main Street Vehicles", "River View Cafe", "STAR WARS: Command Post", "Tahitian Terrace",
   "The Royal Reception Hall"];
   const shanghaiDisneylandRidesToRemove = ["Alice in Wonderland Maze", "Become Iron Man", "Buzz Lightyear Planet Rescue (Standby Pass Required)",
   "Camp Discovery", "Challenge Trails at Camp Discovery", "Challenge Trails at Camp Discovery (Standby Pass Required)", "Marvel Universe",
@@ -64,7 +65,7 @@ const disneylandParkAnaheimRidesToRemove = ["Encounter the Dark Side at Star War
   "Penny Arcade", "Stitch Encounter", "Toon Park", "Westernland Shootin' Gallery"];
   const tokyoDisneySeaRidesToRemove = ["Ariel's Playground", "Big City Vehicles", "DisneySea Electric Railway (Port Discovery Station)",
   "DisneySea Transit Steamer Line (Lost River Delta Dock)", "DisneySea Transit Steamer Line (Mediterranean Harbor Dock)",
-  "Fortress Explorations", "Fortress Explorations &quotThe Leonardo Challenge&quot", "Mermaid Lagoon Theater",
+  "Fortress Explorations", 'Fortress Explorations "The Leonardo Challenge"', "Mermaid Lagoon Theater",
   "Sindbad's Storybook Voyage", "The Magic Lamp Theater", "Turtle Talk"];
   const allRidesToRemove = [disneylandParkAnaheimRidesToRemove, disneyCaliforniaAdventureParkRidesToRemove, animalKingdomRidesToRemove,
     epcotRidesToRemove, hollywoodStudiosRidesToRemove, magicKingdomRidesToRemove, disneylandParkParisRidesToRemove, waltDisneyStudiosParkRidesToRemove,
@@ -312,6 +313,7 @@ app.get("/tokyodisneyseawaittimes", (req, res) => {
       responseData[i].name = responseData[i].name.replace(" - Temporarily Unavailable", "").trim();
       responseData[i].name = responseData[i].name.replace("®", "");
       responseData[i].name = responseData[i].name.replace("*", "");
+      responseData[i].name = responseData[i].name.replace("™", "");
       if (responseData[i].name == "Soarin' Over California") {
           responseData[i].name = "Soarin' Around the World";
       }
@@ -338,35 +340,171 @@ app.get("/test", async (req, res) => {
     }
 })
 
-async function updateWaitTimesInDatabase() {
+ const disneylandParkAnaheimJob = new CronJob(
+    '0 */20 9-23 * * *',
+    function() {
+         updateWaitTimesInDatabase(0);
+    },
+    null,
+    true,
+    'America/Los_Angeles'
+)
+disneylandParkAnaheimJob.start();
+
+const disneyCaliforniaAdventureParkJob = new CronJob(
+    '0 */20 9-23 * * *',
+    function() {
+         updateWaitTimesInDatabase(1);
+    },
+    null,
+    true,
+    'America/Los_Angeles'
+)
+disneyCaliforniaAdventureParkJob.start();
+
+const animalKingdomJob = new CronJob(
+    '0 */20 9-23 * * *',
+    function() {
+         updateWaitTimesInDatabase(2);
+    },
+    null,
+    true,
+    'America/New_York'
+)
+animalKingdomJob.start();
+
+const epcotJob = new CronJob(
+    '0 */20 9-23 * * *',
+    function() {
+         updateWaitTimesInDatabase(3);
+    },
+    null,
+    true,
+    'America/New_York'
+)
+epcotJob.start();
+
+const hollywoodstudiosJob = new CronJob(
+    '0 */20 9-23 * * *',
+    function() {
+         updateWaitTimesInDatabase(4);
+    },
+    null,
+    true,
+    'America/New_York'
+)
+hollywoodstudiosJob.start();
+
+const magicKingdomJob = new CronJob(
+    '0 */20 9-23 * * *',
+    function() {
+         updateWaitTimesInDatabase(5);
+    },
+    null,
+    true,
+    'America/New_York'
+)
+magicKingdomJob.start();
+
+const disneylandParkParisJob = new CronJob(
+    '0 */20 9-23 * * *',
+    function() {
+         updateWaitTimesInDatabase(6);
+    },
+    null,
+    true,
+    'Europe/Paris'
+)
+disneylandParkParisJob.start();
+
+const waltDisneyStudiosParkJob = new CronJob(
+    '0 */20 9-23 * * *',
+    function() {
+         updateWaitTimesInDatabase(7);
+    },
+    null,
+    true,
+    'Europe/Paris'
+)
+waltDisneyStudiosParkJob.start();
+
+const disneylandParkHongKongJob = new CronJob(
+    '0 */20 9-23 * * *',
+    function() {
+         updateWaitTimesInDatabase(8);
+    },
+    null,
+    true,
+    'Asia/Hong_Kong'
+)
+disneylandParkHongKongJob.start();
+
+const shanghaiDisneylandJob = new CronJob(
+    '0 */20 9-23 * * *',
+    function() {
+         updateWaitTimesInDatabase(9);
+    },
+    null,
+    true,
+    'Asia/Shanghai'
+)
+shanghaiDisneylandJob.start();
+
+const tokyoDisneylandJob = new CronJob(
+    '0 */20 9-23 * * *',
+    function() {
+         updateWaitTimesInDatabase(10);
+    },
+    null,
+    true,
+    'Asia/Tokyo'
+)
+tokyoDisneylandJob.start();
+
+const tokyoDisneySeaJob = new CronJob(
+    '0 */20 9-23 * * *',
+    function() {
+         updateWaitTimesInDatabase(11);
+    },
+    null,
+    true,
+    'Asia/Tokyo'
+)
+tokyoDisneySeaJob.start();
+
+
+async function updateWaitTimesInDatabase(parkID) {
     let dayAndTime = getDayAndTime();
     let nums = [];
-    for (let i = 0; i < allResorts.length; i++) {
+    // for (let i = 0; i < allResorts.length; i++) {
         let ids = [];
-        await allResorts[i].GetWaitTimes().then((rideTimes) => {
-            return filterRides(rideTimes, i);
+        let times = [];
+        await allResorts[parkID].GetWaitTimes().then((rideTimes) => {
+            return filterRides(rideTimes, parkID);
         }).then((rideTimes) => {
             return rideTimes.sort(sortRides("name"));
         }).then(async (rideTimes) => {
-            // console.log(rideTimes);
             let rideSQLQuery = "SELECT ride_id FROM rides WHERE ride_name = ? AND resort_id = ?";
             for (let j = 0; j < rideTimes.length; j++) {
                 let rideName = rideTimes[j].name.replace("&amp;", "&");
-                rideName = rideName.replace("™", "");
-                let [rideSQLQueryResult] = await database.query(rideSQLQuery, [decodeURI(rideName), i + 1]);
+                let [rideSQLQueryResult] = await database.query(rideSQLQuery, [decodeURI(rideName), parkID + 1]);
                 if (rideSQLQueryResult[0] != null) {
                     ids.push(rideSQLQueryResult[0]["ride_id"]);
                 }
             }
             for (let k = 0; k < ids.length; k++) {
                 let timeSQLAttribute = "time_" + dayAndTime[1];
-                let amount = 1;
-                let updateSQLQuery = "UPDATE timepoints SET " + timeSQLAttribute + " = 69" + " WHERE ride_id = ? AND park_day = ?";
-                // let updateSQLQuery = "UPDATE timepoints SET " + timeSQLAttribute + " = " + timeSQLAttribute + " + " + amount + " WHERE ride_id = ? AND park_day = ?";
-                await database.query(updateSQLQuery, [ids[k], dayAndTime[0]]);
+                let countSQLAttribute = "count_" + dayAndTime[1];
+                let waitTimeToAdd = rideTimes[k].waitTime;
+                if (waitTimeToAdd != null && waitTimeToAdd != 0) {
+                    let updateTimeSQLQuery = "UPDATE timepoints SET " + timeSQLAttribute + " = " + timeSQLAttribute + " + " + waitTimeToAdd + " WHERE ride_id = ? AND park_day = ?";
+                    await database.query(updateTimeSQLQuery, [ids[k], dayAndTime[0]]);
+                    let updateCountSQLQuery = "UPDATE timepoints SET " + countSQLAttribute + " = " + countSQLAttribute + " + 1 WHERE ride_id = ? AND park_day = ?";
+                    await database.query(updateCountSQLQuery, [ids[k], dayAndTime[0]]);
+                }
             }
         });
-    }
+    // }
     return nums;
 }
 
@@ -406,20 +544,6 @@ async function updateWaitTimesInDatabase() {
         result.push(myTime);
         return result;
     }
-
-
-app.put("/updatetimes", async function(req, res) {
-    console.log(req.body);
-    let resortID = req.body["resortID"];
-    let day = req.body["day"];
-    let time = req.body["time"];
-    let timeSQLAttribute = "time_" + time;
-    let amount = 1;
-    let updateSQLQuery = "UPDATE timepoints SET " + timeSQLAttribute + " = " + timeSQLAttribute + " + " + amount + " WHERE ride_id = 1 AND park_day = ?";
-    let [updateSQLQueryResult] = await database.query(updateSQLQuery, [day]);
-    // res.json(resortID);
-});
-
 
 
 app.listen(port);
