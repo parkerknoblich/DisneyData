@@ -4,6 +4,7 @@ const cors = require("cors");
 const mysql = require("mysql2/promise");
 const { response } = require("express");
 
+
 const database = mysql.createPool({
     host: "localhost",
     port: "3306",
@@ -11,6 +12,63 @@ const database = mysql.createPool({
     password: "98DisneyData349621",
     database: "times"
 });
+
+const disneylandParkAnaheimRidesToRemove = ["Encounter the Dark Side at Star Wars Launch Bay", "Fantasmic!", "Meet Disney Princesses at Royal Hall",
+  "Meet the Resistance at Star Wars Launch Bay", "Meet Tinker Bell at Pixie Hollow", "Mickey and the Magical Map"];
+  const disneyCaliforniaAdventureParkRidesToRemove = ["Disney Junior Dance Party!", "Frozen – Live at the Hyperion", "Heroic Encounter: Captain Marvel", 
+  "Walt Disney Imagineering Blue Sky Cellar", "World of Color"];
+  const animalKingdomRidesToRemove = ["Meet Favorite Disney Pals at Adventurers Outpost", "Nomad Lounge",
+  "The Animation Experience at Conservation Station", "The Boneyard", "Tiffins Restaurant"];
+  const epcotRidesToRemove = ["Awesome Planet", "Beauty and the Beast Sing-Along", "Biergarten Restaurant",
+  "Canada Far and Wide in Circle-Vision 360", "Coral Reef Restaurant", "Disney and Pixar Short Film Festival",
+  "Garden Grill Restaurant", "Impressions de France", "La Hacienda de San Angel", "Le Cellier Steakhouse",
+  "Meet Anna and Elsa at Royal Sommerhus", "Reflections of China", "Rose & Crown Dining Room", "San Angel Inn Restaurante",
+  "Spice Road Table", "The American Adventure"];
+  const hollywoodStudiosRidesToRemove = ["50's Prime Time Café", "BB-8 Astromech on Duty", "Beauty and the Beast-Live on Stage",
+  "Celebrity Spotlight", "Disney Junior Dance Party!", "Disney Junior Play and Dance!", "Disney Society Orchestra and Friends",
+  "For the First Time in Forever: A Frozen Sing-Along Celebration", "Hollywood & Vine", "Indiana Jones™ Epic Stunt Spectacular!",
+  "Lightning McQueen's Racing Academy", "Mama Melrose's Ristorante Italiano", "Meet Sulley at Walt Disney Presents",
+  "Mickey and Minnie Starring in Red Carpet Dreams", "Muppet*Vision 3D", "Oga's Cantina at the Walt Disney World Resort",
+  "Sci-Fi Dine-In Theater Restaurant", "Star Wars: Galaxy's Edge", "Star Wars Launch Bay: Encounter Darth Vader",
+  "Star Wars Launch Bay: Meet Chewbacca", "Star Wars Launch Bay Theater", "The Hollywood Brown Derby", "Vacation Fun - An Original Animated Short with Mickey & Minnie",
+  "Voyage of The Little Mermaid", "Walt Disney Presents"];
+  const magicKingdomRidesToRemove = ["A Pirate's Adventure ~ Treasures of the Seven Seas", "Be Our Guest Restaurant", "Cinderella's Royal Table",
+  "Country Bear Jamboree", "Enchanted Tales with Belle", "Jungle Navigation Co. LTD Skipper Canteen", "Liberty Square Market",
+  "Liberty Tree Tavern", "Main Street Vehicles", "Meet Ariel at Her Grotto", "Meet Cinderella and Elena at Princess Fairytale Hall",
+  "Meet Daring Disney Pals as Circus Stars at Pete's Silly Side Show", "Meet Dashing Disney Pals as Circus Stars at Pete’s Silly Side Show",
+  "Meet Mickey Mouse at Town Square Theater", "Meet Rapunzel and Tiana at Princess Fairytale Hall", "Meet Tinker Bell at Town Square Theater",
+  "Sorcerers of the Magic Kingdom", "The Crystal Palace", "The Hall of Presidents", "The Plaza Restaurant", "Tony's Town Square Restaurant",
+  "Walt Disney World Railroad - Fantasyland", "Walt Disney World Railroad - Frontierland"];
+  const disneylandParkParisRidesToRemove = ["Alice's Curious Labyrinth", "Adventure Isle", "Discovery Arcade", "Disneyland Railroad", "Disneyland Railroad Discoveryland Station",
+  "Disneyland Railroad Fantasyland Station", "Disneyland Railroad Frontierland Depot", "Frontierland Playground", "Horse-Drawn Streetcars",
+  "La Galerie de la Belle au Bois Dormant", "La Tanière du Dragon", "Le Passage Enchanté d'Aladdin", "Liberty Arcade", "Main Street Vehicles",
+  "Pirate Galleon", "Pirates' Beach", "Princess Pavilion", "Rustler Roundup Shootin' Gallery", "Sleeping Beauty Castle",
+  "Welcome to Starport: A Star Wars Encounter"];
+  const waltDisneyStudiosParkRidesToRemove = ["Animation Celebration – Frozen : A Musical Invitation", "Armageddon : les Effets Spéciaux",
+  "Art of Disney Animation®", "Disney Studio 1", "Rock 'n' Roller Coaster starring Aerosmith", "Studio Tram Tour®: Behind the Magic",
+  "Top secret - Under construction: The Avengers new headquarters"];
+  const disneylandParkHongKongRidesToRemove = ["Animation Academy", "Building a Dream: The Magic Behind a Disney Castle",
+  "Clopin's Festival of Foods", "Comet Cafe", "Fairy Tale Forest - presented by PANDORA", "Fantasy Gardens",
+  "Hong Kong Disneyland Railroad – Fantasyland Station", "Iron Man Tech Showcase - Presented by Stark Industries",
+  "Main Street Vehicles", "River View Cafe", "STAR WARS™: Command Post", "Tahitian Terrace",
+  "The Royal Reception Hall"];
+  const shanghaiDisneylandRidesToRemove = ["Alice in Wonderland Maze", "Become Iron Man", "Buzz Lightyear Planet Rescue (Standby Pass Required)",
+  "Camp Discovery", "Challenge Trails at Camp Discovery", "Challenge Trails at Camp Discovery (Standby Pass Required)", "Marvel Universe",
+  "“Once Upon a Time” Adventure", "Peter Pan’s Flight (Standby Pass Required)", "Roaring Rapids (Standby Pass Required)", "Selfie Spot with Captain America", "Selfie Spot with Disney Jungle Characters",
+  "Selfie Spot with Mickey", "Selfie Spot with Princesses", "Selfie Spot with Spider Man", "Seven Dwarfs Mine Train (Standby Pass Required)",
+  "Shipwreck Shore", "Siren's Revenge", "Soaring Over the Horizon (Standby Pass Required)", "Stitch Encounter", 
+  "The Many Adventures of Winnie the Pooh (Standby Pass Required)", "TRON Lightcycle Power Run – Presented by Chevrolet (Standby Pass Required)",
+  "TRON Realm, Chevrolet Digital Challenge", "Vista Trail at Camp Discovery"];
+  const tokyoDisneylandRidesToRemove = ["Chip 'n Dale's Treehouse", "Cinderella's Fairy Tale Hall", "Country Bear Theater",
+  "Donald's Boat", "Enchanted Tale of Beauty and the Beast", "Goofy's Paint 'n' Play House", "Minnie's House", "Omnibus",
+  "Penny Arcade", "Stitch Encounter", "Toon Park", "Westernland Shootin' Gallery"];
+  const tokyoDisneySeaRidesToRemove = ["Ariel's Playground", "Big City Vehicles", "DisneySea Electric Railway (Port Discovery Station)",
+  "DisneySea Transit Steamer Line (Lost River Delta Dock)", "DisneySea Transit Steamer Line (Mediterranean Harbor Dock)",
+  "Fortress Explorations", "Fortress Explorations &quotThe Leonardo Challenge&quot", "Mermaid Lagoon Theater",
+  "Sindbad's Storybook Voyage", "The Magic Lamp Theater", "Turtle Talk"];
+  const allRidesToRemove = [disneylandParkAnaheimRidesToRemove, disneyCaliforniaAdventureParkRidesToRemove, animalKingdomRidesToRemove,
+    epcotRidesToRemove, hollywoodStudiosRidesToRemove, magicKingdomRidesToRemove, disneylandParkParisRidesToRemove, waltDisneyStudiosParkRidesToRemove,
+    disneylandParkHongKongRidesToRemove, shanghaiDisneylandRidesToRemove, tokyoDisneylandRidesToRemove, tokyoDisneySeaRidesToRemove];
 
 const DisneylandResortMagicKingdom = new ThemeParks.Parks.DisneylandResortMagicKingdom();
 const DisneylandResortCaliforniaAdventure = new ThemeParks.Parks.DisneylandResortCaliforniaAdventure();
@@ -25,10 +83,17 @@ const ShanghaiDisneyResortMagicKingdom = new ThemeParks.Parks.ShanghaiDisneyReso
 const TokyoDisneyResortMagicKingdom = new ThemeParks.Parks.TokyoDisneyResortMagicKingdom();
 const TokyoDisneyResortDisneySea = new ThemeParks.Parks.TokyoDisneyResortDisneySea();
 
+const allResorts = [DisneylandResortMagicKingdom, DisneylandResortCaliforniaAdventure, WaltDisneyWorldAnimalKingdom,
+WaltDisneyWorldEpcot, WaltDisneyWorldHollywoodStudios, WaltDisneyWorldMagicKingdom, DisneylandParisMagicKingdom,
+DisneylandParisWaltDisneyStudios, HongKongDisneyland, ShanghaiDisneyResortMagicKingdom, TokyoDisneyResortMagicKingdom,
+TokyoDisneyResortDisneySea];
+
 const app = express();
 const port = 8000;
 
+app.use(express.json());
 app.use(cors());
+
 
 app.get("/landtimes/:day/:time/:resortID", async function(req, res) {
     let day = req.params["day"];
@@ -97,7 +162,12 @@ async function getIndividualTime(rideName, resortID, day) {
 }
 
 app.get("/disneylandparkanaheimwaittimes", (req, res) => {
-    DisneylandResortMagicKingdom.GetWaitTimes().then((rideTimes) => {
+    DisneylandResortMagicKingdom.GetWaitTimes()
+    .then((rideTimes) => {
+        return filterRides(rideTimes, 0);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
         console.error(error);
@@ -106,6 +176,10 @@ app.get("/disneylandparkanaheimwaittimes", (req, res) => {
 
 app.get("/disneycaliforniaadventureparkwaittimes", (req, res) => {
     DisneylandResortCaliforniaAdventure.GetWaitTimes().then((rideTimes) => {
+        return filterRides(rideTimes, 1);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
         console.error(error);
@@ -114,6 +188,10 @@ app.get("/disneycaliforniaadventureparkwaittimes", (req, res) => {
 
 app.get("/animalkingdomwaittimes", (req, res) => {
     WaltDisneyWorldAnimalKingdom.GetWaitTimes().then((rideTimes) => {
+        return filterRides(rideTimes, 2);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
         console.error(error);
@@ -122,6 +200,10 @@ app.get("/animalkingdomwaittimes", (req, res) => {
 
 app.get("/epcotwaittimes", (req, res) => {
     WaltDisneyWorldEpcot.GetWaitTimes().then((rideTimes) => {
+        return filterRides(rideTimes, 3);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
         console.error(error);
@@ -130,6 +212,10 @@ app.get("/epcotwaittimes", (req, res) => {
 
 app.get("/hollywoodstudioswaittimes", (req, res) => {
     WaltDisneyWorldHollywoodStudios.GetWaitTimes().then((rideTimes) => {
+        return filterRides(rideTimes, 4);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
         console.error(error);
@@ -138,6 +224,10 @@ app.get("/hollywoodstudioswaittimes", (req, res) => {
 
 app.get("/magickingdomwaittimes", (req, res) => {
     WaltDisneyWorldMagicKingdom.GetWaitTimes().then((rideTimes) => {
+        return filterRides(rideTimes, 5);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
         console.error(error);
@@ -146,6 +236,10 @@ app.get("/magickingdomwaittimes", (req, res) => {
 
 app.get("/disneylandparkpariswaittimes", (req, res) => {
     DisneylandParisMagicKingdom.GetWaitTimes().then((rideTimes) => {
+        return filterRides(rideTimes, 6);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
         console.error(error);
@@ -154,6 +248,10 @@ app.get("/disneylandparkpariswaittimes", (req, res) => {
 
 app.get("/waltdisneystudiosparkwaittimes", (req, res) => {
     DisneylandParisWaltDisneyStudios.GetWaitTimes().then((rideTimes) => {
+        return filterRides(rideTimes, 7);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
         console.error(error);
@@ -162,6 +260,10 @@ app.get("/waltdisneystudiosparkwaittimes", (req, res) => {
 
 app.get("/disneylandparkhongkongwaittimes", (req, res) => {
     HongKongDisneyland.GetWaitTimes().then((rideTimes) => {
+        return filterRides(rideTimes, 8);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
         console.error(error);
@@ -170,6 +272,10 @@ app.get("/disneylandparkhongkongwaittimes", (req, res) => {
 
 app.get("/shanghaidisneylandwaittimes", (req, res) => {
     ShanghaiDisneyResortMagicKingdom.GetWaitTimes().then((rideTimes) => {
+        return filterRides(rideTimes, 9);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
         console.error(error);
@@ -178,6 +284,10 @@ app.get("/shanghaidisneylandwaittimes", (req, res) => {
 
 app.get("/tokyodisneylandwaittimes", (req, res) => {
     TokyoDisneyResortMagicKingdom.GetWaitTimes().then((rideTimes) => {
+        return filterRides(rideTimes, 10);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
         console.error(error);
@@ -186,10 +296,130 @@ app.get("/tokyodisneylandwaittimes", (req, res) => {
 
 app.get("/tokyodisneyseawaittimes", (req, res) => {
     TokyoDisneyResortDisneySea.GetWaitTimes().then((rideTimes) => {
+        return filterRides(rideTimes, 11);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then((rideTimes) => {
         res.send(rideTimes);
     }).catch((error) => {
         console.error(error);
     });
 });
+
+ function filterRides(responseData, index) {
+    let filteredArray = [];
+    for (let i = 0; i < responseData.length; i++) {
+      responseData[i].name = responseData[i].name.replace(" - Temporarily Unavailable", "").trim();
+      responseData[i].name = responseData[i].name.replace("®", "");
+      responseData[i].name = responseData[i].name.replace("*", "");
+      if (responseData[i].name == "Soarin' Over California") {
+          responseData[i].name = "Soarin' Around the World";
+      }
+      if (!allRidesToRemove[index].includes(responseData[i].name.replace(" - Temporarily Unavailable", "").trim())) {
+          filteredArray.push(responseData[i]);
+      }
+    }
+    return filteredArray;
+}
+
+function sortRides(key) {
+    return function(a, b) {
+        return a[key].replace(/\W/g, '').localeCompare(b[key].replace(/\W/g, ''));
+    }
+}
+
+app.get("/test", async (req, res) => {
+    let result= [];
+    try {
+        result = await updateWaitTimesInDatabase();
+        res.send(result);
+    } catch (error) {
+        res.send(error);
+    }
+})
+
+async function updateWaitTimesInDatabase() {
+    let dayAndTime = getDayAndTime();
+    let nums = [];
+    for (let i = 0; i < allResorts.length; i++) {
+        let ids = [];
+        await allResorts[i].GetWaitTimes().then((rideTimes) => {
+            return filterRides(rideTimes, i);
+        }).then((rideTimes) => {
+            return rideTimes.sort(sortRides("name"));
+        }).then(async (rideTimes) => {
+            // console.log(rideTimes);
+            let rideSQLQuery = "SELECT ride_id FROM rides WHERE ride_name = ? AND resort_id = ?";
+            for (let j = 0; j < rideTimes.length; j++) {
+                let rideName = rideTimes[j].name.replace("&amp;", "&");
+                rideName = rideName.replace("™", "");
+                let [rideSQLQueryResult] = await database.query(rideSQLQuery, [decodeURI(rideName), i + 1]);
+                if (rideSQLQueryResult[0] != null) {
+                    ids.push(rideSQLQueryResult[0]["ride_id"]);
+                }
+            }
+            for (let k = 0; k < ids.length; k++) {
+                let timeSQLAttribute = "time_" + dayAndTime[1];
+                let amount = 1;
+                let updateSQLQuery = "UPDATE timepoints SET " + timeSQLAttribute + " = 69" + " WHERE ride_id = ? AND park_day = ?";
+                // let updateSQLQuery = "UPDATE timepoints SET " + timeSQLAttribute + " = " + timeSQLAttribute + " + " + amount + " WHERE ride_id = ? AND park_day = ?";
+                await database.query(updateSQLQuery, [ids[k], dayAndTime[0]]);
+            }
+        });
+    }
+    return nums;
+}
+
+    function getDayAndTime() {
+        let result = [];
+        let date = new Date();
+        let days = new Array(7);
+        days[0] = "Sunday";
+        days[1] = "Monday";
+        days[2] = "Tuesday";
+        days[3] = "Wednesday";
+        days[4] = "Thursday";
+        days[5] = "Friday";
+        days[6] = "Saturday";
+        let day = days[date.getDay()];
+        let hours = date.getHours();
+        let amPM = "am";
+        if (hours >= 12) {
+          hours -= 12;
+          amPM = "pm";
+        }
+        if (hours == 0) {
+          hours = 12;
+        }
+        let minutes = date.getMinutes();
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        } else {
+          minutes += "";
+        }
+        minutes += amPM;
+        let totalTime = hours + minutes;
+        console.log("Actual: " + totalTime);
+        let myTime = "900am";
+        console.log("Mine: " + myTime);
+        result.push(day);
+        result.push(myTime);
+        return result;
+    }
+
+
+app.put("/updatetimes", async function(req, res) {
+    console.log(req.body);
+    let resortID = req.body["resortID"];
+    let day = req.body["day"];
+    let time = req.body["time"];
+    let timeSQLAttribute = "time_" + time;
+    let amount = 1;
+    let updateSQLQuery = "UPDATE timepoints SET " + timeSQLAttribute + " = " + timeSQLAttribute + " + " + amount + " WHERE ride_id = 1 AND park_day = ?";
+    let [updateSQLQueryResult] = await database.query(updateSQLQuery, [day]);
+    // res.json(resortID);
+});
+
+
 
 app.listen(port);
