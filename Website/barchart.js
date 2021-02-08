@@ -67,7 +67,6 @@
       activeParkID = 12;
       currentLands = tokyoDisneySeaLands;
     }
-    // getRideWaitTimes();
     getLandWaitTimes();
     let dateSelector = document.querySelector("#selectDate select");
     dateSelector.addEventListener("change", function() {
@@ -77,55 +76,6 @@
     timeSelector.addEventListener("change", function() {
       getLandWaitTimes();
     });
-    // updateWaitTimesInDatabase();
-    //getAllWaitTimesForUpdate();
-  }
-
-  function updateWaitTimesInDatabase() {
-    let date = new Date();
-    let days = new Array(7);
-    days[0] = "Sunday";
-    days[1] = "Monday";
-    days[2] = "Tuesday";
-    days[3] = "Wednesday";
-    days[4] = "Thursday";
-    days[5] = "Friday";
-    days[6] = "Saturday";
-    let day = days[date.getDay()];
-    let hours = date.getHours();
-    let amPM = "am";
-    if (hours >= 12) {
-      hours -= 12;
-      amPM = "pm";
-    }
-    if (hours == 0) {
-      hours = 12;
-    }
-    let minutes = date.getMinutes();
-    if (minutes < 10) {
-      minutes = "0" + minutes;
-    } else {
-      minutes += "";
-    }
-    minutes += amPM;
-    let totalTime = hours + minutes;
-    console.log("Actual: " + totalTime);
-    let myTime = "900am";
-    console.log("Mine: " + myTime);
-    let url = "https://hidden-basin-72625.herokuapp.com/updatetimes";
-    fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({"resortID": activeParkID, "day": day, "time": myTime})
-    })
-    .then(response => response.text())
-    .then(foo);
-  }
-
-  function foo(responseData) {
-    console.log(responseData);
   }
 
   function getRideWaitTimes() {
