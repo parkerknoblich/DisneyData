@@ -3,6 +3,7 @@ const ThemeParks = require("themeparks");
 const cors = require("cors");
 const mysql = require("mysql2/promise");
 const CronJob = require("cron").CronJob;
+const { DateTime } = require("luxon");
 const { response } = require("express");
 
 
@@ -330,15 +331,17 @@ function sortRides(key) {
     }
 }
 
-app.get("/test", async (req, res) => {
-    let result= [];
-    try {
-        result = await updateWaitTimesInDatabase();
-        res.send(result);
-    } catch (error) {
-        res.send(error);
-    }
-})
+// app.get("/test", (req, res) => {
+//     getDayAndTime(10);
+//     res.send("Hello");
+//     let result= [];
+//     try {
+//         result = await updateWaitTimesInDatabase();
+//         res.send(result);
+//     } catch (error) {
+//         res.send(error);
+//     }
+// })
 
  const disneylandParkAnaheimJob = new CronJob(
     '0 */20 9-23 * * *',
@@ -474,76 +477,78 @@ tokyoDisneySeaJob.start();
 
 
 async function updateWaitTimesInDatabase(parkID) {
-    let dayAndTime = getDayAndTime();
-    let nums = [];
-    // for (let i = 0; i < allResorts.length; i++) {
-        let ids = [];
-        let times = [];
-        await allResorts[parkID].GetWaitTimes().then((rideTimes) => {
-            return filterRides(rideTimes, parkID);
-        }).then((rideTimes) => {
-            return rideTimes.sort(sortRides("name"));
-        }).then(async (rideTimes) => {
-            let rideSQLQuery = "SELECT ride_id FROM rides WHERE ride_name = ? AND resort_id = ?";
-            for (let j = 0; j < rideTimes.length; j++) {
-                let rideName = rideTimes[j].name.replace("&amp;", "&");
-                let [rideSQLQueryResult] = await database.query(rideSQLQuery, [decodeURI(rideName), parkID + 1]);
-                if (rideSQLQueryResult[0] != null) {
-                    ids.push(rideSQLQueryResult[0]["ride_id"]);
-                }
+    let dayAndTime = getDayAndTime(parkID);
+    let ids = [];
+    await allResorts[parkID].GetWaitTimes().then((rideTimes) => {
+        return filterRides(rideTimes, parkID);
+    }).then((rideTimes) => {
+        return rideTimes.sort(sortRides("name"));
+    }).then(async (rideTimes) => {
+        let rideSQLQuery = "SELECT ride_id FROM rides WHERE ride_name = ? AND resort_id = ?";
+        for (let j = 0; j < rideTimes.length; j++) {
+            let rideName = rideTimes[j].name.replace("&amp;", "&");
+            let [rideSQLQueryResult] = await database.query(rideSQLQuery, [decodeURI(rideName), parkID + 1]);
+            if (rideSQLQueryResult[0] != null) {
+                ids.push(rideSQLQueryResult[0]["ride_id"]);
             }
-            for (let k = 0; k < ids.length; k++) {
-                let timeSQLAttribute = "time_" + dayAndTime[1];
-                let countSQLAttribute = "count_" + dayAndTime[1];
-                let waitTimeToAdd = rideTimes[k].waitTime;
-                if (waitTimeToAdd != null && waitTimeToAdd != 0) {
-                    let updateTimeSQLQuery = "UPDATE timepoints SET " + timeSQLAttribute + " = " + timeSQLAttribute + " + " + waitTimeToAdd + " WHERE ride_id = ? AND park_day = ?";
-                    await database.query(updateTimeSQLQuery, [ids[k], dayAndTime[0]]);
-                    let updateCountSQLQuery = "UPDATE timepoints SET " + countSQLAttribute + " = " + countSQLAttribute + " + 1 WHERE ride_id = ? AND park_day = ?";
-                    await database.query(updateCountSQLQuery, [ids[k], dayAndTime[0]]);
-                }
+        }
+        for (let k = 0; k < ids.length; k++) {
+            let timeSQLAttribute = "time_" + dayAndTime[1];
+            let countSQLAttribute = "count_" + dayAndTime[1];
+            let waitTimeToAdd = rideTimes[k].waitTime;
+            if (waitTimeToAdd != null && waitTimeToAdd != 0) {
+                let updateTimeSQLQuery = "UPDATE timepoints SET " + timeSQLAttribute + " = " + timeSQLAttribute + " + " + waitTimeToAdd + " WHERE ride_id = ? AND park_day = ?";
+                await database.query(updateTimeSQLQuery, [ids[k], dayAndTime[0]]);
+                let updateCountSQLQuery = "UPDATE timepoints SET " + countSQLAttribute + " = " + countSQLAttribute + " + 1 WHERE ride_id = ? AND park_day = ?";
+                await database.query(updateCountSQLQuery, [ids[k], dayAndTime[0]]);
             }
-        });
-    // }
-    return nums;
+        }
+    });
 }
 
-    function getDayAndTime() {
-        let result = [];
-        let date = new Date();
-        let days = new Array(7);
-        days[0] = "Sunday";
-        days[1] = "Monday";
-        days[2] = "Tuesday";
-        days[3] = "Wednesday";
-        days[4] = "Thursday";
-        days[5] = "Friday";
-        days[6] = "Saturday";
-        let day = days[date.getDay()];
-        let hours = date.getHours();
-        let amPM = "am";
-        if (hours >= 12) {
-          hours -= 12;
-          amPM = "pm";
-        }
-        if (hours == 0) {
-          hours = 12;
-        }
-        let minutes = date.getMinutes();
-        if (minutes < 10) {
-          minutes = "0" + minutes;
-        } else {
-          minutes += "";
-        }
-        minutes += amPM;
-        let totalTime = hours + minutes;
-        console.log("Actual: " + totalTime);
-        let myTime = "900am";
-        console.log("Mine: " + myTime);
-        result.push(day);
-        result.push(myTime);
-        return result;
-    }
 
+    function getDayAndTime(parkID) {
+        const timeZones = ["America/Los_Angeles", "America/New_York", "Europe/Paris", "Asia/Hong_Kong", "Asia/Shanghai", "Asia/Tokyo"];
+        let selectedTimeZone;
+        let dayAndTime = [];
+        if (parkID == 0 || parkID == 1) {
+            selectedTimeZone = timeZones[0];
+        } else if (parkID == 2 || parkID == 3 || parkID == 4 || parkID == 5) {
+            selectedTimeZone = timeZones[1];
+        } else if (parkID == 6 || parkID == 7) {
+            selectedTimeZone = timeZones[2];
+        } else if (parkID == 8) {
+            selectedTimeZone = timeZones[3];
+        } else if (parkId = 9) {
+            selectedTimeZone = timeZones[4];
+        } else {
+            selectedTimeZone = timeZones[5];
+        }
+        let dayTimeObject = DateTime.local().setZone(selectedTimeZone);
+        let dayNumber = dayTimeObject.weekday;
+        let day;
+        if (dayNumber == 7) {
+            day = "Sunday";
+        } else if (dayNumber == 1) {
+            day = "Monday";
+        } else if (dayNumber == 2) {
+            day = "Tuesday";
+        } else if (dayNumber == 3) {
+            day = "Wednesday";
+        } else if (dayNumber == 4) {
+            day = "Thursday";
+        } else if (dayNumber == 5) {
+            day = "Friday";
+        } else {
+            day = "Saturday";
+        }
+        dayAndTime.push(day);
+        let dayTimeString = dayTimeObject.toLocaleString(DateTime.DATETIME_MED);
+        let dayTimeStringSplit = dayTimeString.split(",");
+        let time = dayTimeStringSplit[2].trim();
+        time = time.replace(" ", "").replace(":", "").toLowerCase();
+        dayAndTime.push(time);
+        return dayAndTime;
+    }
 
 app.listen(port);
