@@ -124,9 +124,6 @@
   }
 
   function getAllIndividualWaitTimes(responseData) {
-    for (let i = 0; i < responseData.length; i++) {
-        console.log(responseData[i].name + " " + responseData[i].waitTime);
-    }
     let allRidesImages = document.getElementsByClassName("rideImage");
     let allRideNames = document.getElementsByClassName("rideName");
     for (let i = 0; i < allRidesImages.length; i++) {
