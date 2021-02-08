@@ -91,7 +91,8 @@ DisneylandParisWaltDisneyStudios, HongKongDisneyland, ShanghaiDisneyResortMagicK
 TokyoDisneyResortDisneySea];
 
 const app = express();
-const port = 8000;
+// const port = 8000;
+const port = process.env.PORT || 80;
 
 app.use(express.json());
 app.use(cors());
