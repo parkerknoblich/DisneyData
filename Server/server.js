@@ -8,10 +8,10 @@ const { response } = require("express");
 
 
 const database = mysql.createPool({
-    host: "localhost",
-    port: "3306",
-    user: "root",
-    password: "98DisneyData349621",
+    host: "db-disneydata-do-user-8683092-0.b.db.ondigitalocean.com",
+    port: "25060",
+    user: "doadmin",
+    password: "cixxi5d8rygz6zfx",
     database: "times"
 });
 

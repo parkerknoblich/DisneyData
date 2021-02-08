@@ -112,7 +112,7 @@
     console.log("Actual: " + totalTime);
     let myTime = "900am";
     console.log("Mine: " + myTime);
-    let url = "http://localhost:8000/updatetimes";
+    let url = "https://hidden-basin-72625.herokuapp.com/updatetimes";
     fetch(url, {
       method: 'PUT',
       headers: {
@@ -132,40 +132,40 @@
     let url;
     switch (activeParkID) {
       case 1:
-        url = "http://localhost:8000/disneylandparkanaheimwaittimes";
+        url = "https://hidden-basin-72625.herokuapp.com/disneylandparkanaheimwaittimes";
         break;
       case 2:
-        url = "http://localhost:8000/disneycaliforniaadventureparkwaittimes";
+        url = "https://hidden-basin-72625.herokuapp.com/disneycaliforniaadventureparkwaittimes";
         break;
       case 3:
-        url = "http://localhost:8000/animalkingdomwaittimes";
+        url = "https://hidden-basin-72625.herokuapp.com/animalkingdomwaittimes";
         break;
       case 4:
-        url = "http://localhost:8000/epcotwaittimes";
+        url = "https://hidden-basin-72625.herokuapp.com/epcotwaittimes";
         break;
       case 5:
-        url = "http://localhost:8000/hollywoodstudioswaittimes";
+        url = "https://hidden-basin-72625.herokuapp.com/hollywoodstudioswaittimes";
         break;
       case 6:
-        url = "http://localhost:8000/magickingdomwaittimes";
+        url = "https://hidden-basin-72625.herokuapp.com/magickingdomwaittimes";
         break;
       case 7:
-        url = "http://localhost:8000/disneylandparkpariswaittimes";
+        url = "https://hidden-basin-72625.herokuapp.com/disneylandparkpariswaittimes";
         break;
       case 8:
-        url = "http://localhost:8000/waltdisneystudiosparkwaittimes";
+        url = "https://hidden-basin-72625.herokuapp.com/waltdisneystudiosparkwaittimes";
         break;
       case 9:
-        url = "http://localhost:8000/disneylandparkhongkongwaittimes";
+        url = "https://hidden-basin-72625.herokuapp.com/disneylandparkhongkongwaittimes";
         break;
       case 10:
-        url = "http://localhost:8000/shanghaidisneylandwaittimes";
+        url = "https://hidden-basin-72625.herokuapp.com/shanghaidisneylandwaittimes";
         break;
       case 11:
-        url = "http://localhost:8000/tokyodisneylandwaittimes";
+        url = "https://hidden-basin-72625.herokuapp.com/tokyodisneylandwaittimes";
         break;
       case 12:
-        url = "http://localhost:8000/tokyodisneyseawaittimes";
+        url = "https://hidden-basin-72625.herokuapp.com/tokyodisneyseawaittimes";
         break;
     }
     fetch(url)
@@ -208,7 +208,7 @@
   function getIndividualPredictedWaitTime(rideName) {
     let dateSelector = document.querySelector("#selectDate select");
     let day = dateSelector.options[dateSelector.selectedIndex].text.split(" ")[0];
-    let url = "http://localhost:8000/individualtime/" + rideName + "/" + activeParkID + "/" + day;
+    let url = "https://hidden-basin-72625.herokuapp.com/individualtime/" + rideName + "/" + activeParkID + "/" + day;
     fetch(url)
       .then(response => response.json())
       .then(displayPredictedIndividualWaitTime);
@@ -271,7 +271,7 @@
     let time = timeSelector.options[timeSelector.selectedIndex].text;
     time = time.replace(" ", "");
     time = time.replace(":", "");
-    let url = "http://localhost:8000/landtimes/" + day + "/" + time + "/" + activeParkID;
+    let url = "https://hidden-basin-72625.herokuapp.com/landtimes/" + day + "/" + time + "/" + activeParkID;
     fetch(url)
       .then(response => response.json())
       .then(displayAverageWaitTimesByLand);
