@@ -258,16 +258,22 @@ padding-left: 0;
 
                                   /* rideTimesSection */
 
-#rideSearch {
+#rideTimesSection {
+  width: 100%;
+}
+
+ #rideSearch {
   border-radius: 25px;
   height: 2em;
-  margin-left: 35%;
-  width: 30em;
   margin-top: 2em;
   outline: none;
   text-align: center;
   font-size: larger;
   border: none;
+  display: block;
+  width: 30em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #rideSearch:hover, #rideSearch:focus {
