@@ -136,9 +136,11 @@
   }
 
   function displayCurrentIndividualRideWaitTime(num) {
+    let text = null;
     let trailColor;
     let backgroundColor= "#fff";
     if (num == 0) {
+      text = "Closed";
       backgroundColor = "#FF0000";
     }
     if (num <= 30) {
@@ -149,7 +151,7 @@
     } else {
         trailColor = "#FF0000";
     }
-    animateTimeCircle(num, trailColor, backgroundColor, selectedRideNumber);
+    animateTimeCircle(num, trailColor, backgroundColor, selectedRideNumber, text);
   }
 
   function getIndividualPredictedWaitTime(rideName) {

@@ -1,5 +1,4 @@
-function animateTimeCircle(num, trailColor, backgroundColorParam, rideNumber) {
-    // var value = 150;
+function animateTimeCircle(num, trailColor, backgroundColorParam, rideNumber, text) {
     let allCurrentTimes = document.getElementsByClassName("currentTime");
     $(allCurrentTimes[rideNumber]).circliful({
         animationStep: 2,
@@ -11,5 +10,6 @@ function animateTimeCircle(num, trailColor, backgroundColorParam, rideNumber) {
         percent: num,
         showPercent: 1,
         noPercentageSign: 1,
+        replacePercentageByText: text
       });
 }
