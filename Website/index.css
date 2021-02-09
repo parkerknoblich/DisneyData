@@ -29,7 +29,6 @@ a:hover {
 
                             /* resortNavigationBarSection  */
 #parks {
-  /* box-shadow: 0 4px 2px -1px gray; */
   position: fixed;
   z-index: 100;
   width: 100%;
@@ -47,7 +46,6 @@ a:hover {
   background: white;
   display: block;
   float: left;
-  /* padding: 0.8rem; */
   padding-top: 1.25em;
   position: relative;
   text-decoration: none;
@@ -102,7 +100,7 @@ padding-left: 0;
 }
 
 #parks > li > ul {
-  margin-top: 1.4em;
+  margin-top: 1.2em;
 }
 
 .activeResort {
@@ -143,11 +141,8 @@ padding-left: 0;
   flex-direction: column;
   z-index: 100;
   position: fixed;
-  /* margin-top: 35vh; */
   margin-top: 35vh;
-  /* right: 1.5em; */
-  right: 2.65em;
-  /* background-image: url("images/sidebarbackgroundimage.jpg"); */
+  right: 2%;
   background-color:rgba(255, 255, 255, 0.7);
   background-repeat: no-repeat;
   background-size: cover;
@@ -223,7 +218,6 @@ padding-left: 0;
   position: relative;
   width: 100%;
   height: 80vh;
-  /* margin-top: 4.5em; */
  }
 
 #slider figure img { 
@@ -259,7 +253,7 @@ padding-left: 0;
 }
 
 .activeIndicator {
-  background-color: #33BBFF;
+  background-color: white;
 }
 
                                   /* rideTimesSection */
@@ -274,7 +268,10 @@ padding-left: 0;
   text-align: center;
   font-size: larger;
   border: none;
-  box-shadow: 0 4px 2px -2px gray;
+}
+
+#rideSearch:hover, #rideSearch:focus {
+box-shadow: 0 5px 2px -2px black;
 }
 
 #ridesContainer {
@@ -315,14 +312,12 @@ padding-left: 0;
 
 #rides > li {
   font-size: 2em;
-  /* height: 10em; */
   height: 13em;
   position: relative;
   text-align: center;
   overflow: hidden;
   display: inline-block;
   display: box;
-  /* width: 33%; */
   width: 50%;
 }
 
@@ -347,9 +342,7 @@ padding-left: 0;
 .parent
 {
   overflow: hidden;
-  /* text-align: center; */
   position: relative;
-  /* height: 10em; */
   height: 15em;
 }
 
@@ -360,12 +353,10 @@ padding-left: 0;
 
  .child {
   background: rgba( 0, 0, 0, 0.7 );
-  /* bottom: -7.7em; */
   bottom: -10.7em;
   color: #fff;
   height: 100%;
   left: 0%;
-  /* text-align: center; */
   position: absolute;
   transition: bottom 1.5s ease;
   width: 100%;
@@ -392,7 +383,6 @@ padding-left: 0;
                           /* landTimesSection */
 #landTimesSection {
   margin-top: 5em;
-  
 }
 
 #dateAndTimeSelection {
@@ -410,7 +400,6 @@ padding-left: 0;
   border: none;
   font-size: 1em;
   font-weight: bolder;
-  /* box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); */
   -webkit-appearance: button;
   appearance: button;
   outline: none;
