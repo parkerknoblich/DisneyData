@@ -124,6 +124,7 @@
   }
 
   function getAllIndividualWaitTimes(responseData) {
+    checkIfClosed(responseData);
     let allRidesImages = document.getElementsByClassName("rideImage");
     let allRideNames = document.getElementsByClassName("rideName");
     for (let i = 0; i < allRidesImages.length; i++) {
@@ -132,6 +133,24 @@
             setTimeout(displayCurrentIndividualRideWaitTime, 350, responseData[i].waitTime);
             getIndividualPredictedWaitTime(allRideNames[i].innerHTML.replace("&amp;", "&"));
         }, {once : true});
+    }
+  }
+
+  function checkIfClosed(responseData) {
+    let targetNum = responseData.length;
+    let count = 0;
+    for (let i = 0; i < targetNum; i++) {
+      if (responseData[i].waitTime == null || responseData[i].waitTime == 0) {
+        count++;
+      }
+    }
+    if (count == targetNum) {
+      let modal = document.getElementById("myModal");
+      modal.style.display = "block";
+      let close = document.getElementById("close");
+      close.addEventListener("click", function() {
+        modal.style.display = "none";
+      })
     }
   }
 
