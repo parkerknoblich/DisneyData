@@ -145,9 +145,9 @@
       }
     }
     if (count == targetNum) {
-      let modal = document.getElementById("myModal");
+      let modal = document.getElementById("closedPageSpread");
       modal.style.display = "block";
-      let close = document.getElementById("close");
+      let close = document.getElementById("x");
       close.addEventListener("click", function() {
         modal.style.display = "none";
       })
@@ -337,5 +337,7 @@
     }
     return result;
   }
+
+  
 
 }) ();
