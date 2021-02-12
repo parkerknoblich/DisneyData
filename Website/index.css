@@ -13,7 +13,7 @@ body {
 a {
   text-decoration: none;
     font-weight: bold;
-    font-size: larger;
+    font-size: 1.2em;
     display: block;
     text-align: center;
 }
@@ -85,7 +85,7 @@ display: block;
 
 ul li ul li {
   clear: both;
-width: 100%;
+  width: 100%;
 }
 
 ul > li > ul {
@@ -318,6 +318,8 @@ padding-left: 0;
 
 #rideTimesSection {
   width: 100%;
+  padding-top: 40px;
+  margin-top: -40px;
 }
 
  #rideSearch {
@@ -335,7 +337,7 @@ padding-left: 0;
 }
 
 #rideSearch:hover, #rideSearch:focus {
-box-shadow: 0 5px 2px -2px black;
+box-shadow: 0 6px 4px -2px black;
 }
 
 #ridesContainer {
