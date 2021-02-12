@@ -1,6 +1,7 @@
 # Description
-DisneyData displays live and predicted wait times of every Disney theme park ride and estimates peak hours of every Disney theme park land. All live ride wait times are
-fetched upon page load (refresh page to get most recent wait time). <br><br>
+DisneyData displays live and predicted wait times of every Disney theme park ride and estimates peak hours of every Disney theme park land. Live ride wait times 
+for current park are fetched upon page load (refresh page to get most recent wait time). All live ride wait times are fetched every 20 mins from 9:00am - 12:00am
+according to each park's specific timezone.<br><br>
 # Supported Parks <br>
 Disneyland Park (Disneyland Resort - Anaheim, California) <br> 
 Disney California Adventure Park (Disneyland Resort - Anaheim, California) <br>
