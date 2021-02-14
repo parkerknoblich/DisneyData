@@ -70,13 +70,14 @@
 .iconText {
     display: block;
     font-weight: bolder;
-    font-size: 1.5em;
+    font-size: 2em;
+    color: #33BBFF;
 }
 
 #enterParksContainer {
     display: flex;
     justify-content: center;
-    margin-top: 7%;
+    margin-top: 5%;
 }
 
 button {
