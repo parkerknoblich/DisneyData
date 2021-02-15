@@ -5,7 +5,7 @@
 }
 
 body {
-  background-image: url("images/ridetimessectionbackground.jpg");
+  background-image: url("../images/ridetimessectionbackground.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -169,35 +169,35 @@ padding-left: 0;
 }
 
 #carouselSidebarElement > a {
-  background-image: url("images/carouselsidebarimage.png");
+  background-image: url("../images/carouselsidebarimage.png");
 }
 
 #carouselSidebarElement > a:hover {
-  background-image: url("images/carouselsidebarimage2.png");
+  background-image: url("../images/carouselsidebarimage2.png");
 }
 
 #ridesSidebarElement > a {
-  background-image: url("images/ridessidebarimage.png");
+  background-image: url("../images/ridessidebarimage.png");
 }
 
 #ridesSidebarElement > a:hover {
-  background-image: url("images/ridessidebarimage2.png");
+  background-image: url("../images/ridessidebarimage2.png");
 }
 
 #landsSidebarElement > a {
-  background-image: url("images/landssidebarimage.png");
+  background-image: url("../images/landssidebarimage.png");
 }
 
 #landsSidebarElement > a:hover {
-  background-image: url("images/landssidebarimage2.png");
+  background-image: url("../images/landssidebarimage2.png");
 }
 
 #weatherSidebarElement > a {
-  background-image: url("images/weathersidebarimage.png");
+  background-image: url("../images/weathersidebarimage.png");
 }
 
 #weatherSidebarElement > a:hover {
-  background-image: url("images/weathersidebarimage2.png");
+  background-image: url("../images/weathersidebarimage2.png");
 }
 
 
@@ -267,7 +267,6 @@ padding-left: 0;
   z-index: 1;
   left: 0;
   top: 0;
-  /* padding-top: 50vh; */
   background-color: rgba(0,0,0,0.5);
   
 }
@@ -279,6 +278,7 @@ padding-left: 0;
   overflow: visible;
   margin: auto;
   top: 50vh;
+  position: relative;
 }
 
 #x {
@@ -447,6 +447,24 @@ box-shadow: 0 6px 4px -2px black;
   margin-top: 1.5em;
 }
 
+.currentTime {
+  margin: auto;
+  width: 300px;
+  height: 300px;
+  position: relative;
+  top: 12%;
+}
+
+.lineChartParent {
+  height: 250px;
+  width: 600px;
+}
+
+.predictedTime {
+  height: 100%;
+  width: 100%;
+}
+
                           /* landTimesSection */
 #landTimesSection {
   margin-top: 5em;
@@ -490,4 +508,17 @@ select:hover {
 
 #selectTime > select {
   width: 10em;
+}
+
+#barChartParent {
+  height: 800px;
+  width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(51, 187, 255,0.2);
+  border-radius: 25px;
+}
+#barChart {
+  height: 100%;
+  width: 100%;
 }

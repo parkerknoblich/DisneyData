@@ -1,7 +1,6 @@
 (function() {
 
   let activeParkID = 1;
-  // let ridesToRemove;
   let currentLands;
   let barChart = null;
   let lineChart = null;
@@ -173,6 +172,22 @@
     animateTimeCircle(num, trailColor, backgroundColor, selectedRideNumber, text);
   }
 
+  function animateTimeCircle(num, trailColor, backgroundColorParam, rideNumber, text) {
+    let allCurrentTimes = document.getElementsByClassName("currentTime");
+    $(allCurrentTimes[rideNumber]).circliful({
+        animationStep: 2,
+        fontColor: "#fff",
+        foregroundBorderWidth: 15,
+        foregroundColor: trailColor,
+        backgroundColor: backgroundColorParam,
+        backgroundBorderWidth: 15,
+        percent: num,
+        showPercent: 1,
+        noPercentageSign: 1,
+        replacePercentageByText: text
+      });
+}
+
   function getIndividualPredictedWaitTime(rideName) {
     let dateSelector = document.querySelector("#selectDate select");
     let day = dateSelector.options[dateSelector.selectedIndex].text.split(" ")[0];
@@ -337,7 +352,5 @@
     }
     return result;
   }
-
-  
 
 }) ();
